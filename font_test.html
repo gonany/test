@@ -1,0 +1,115 @@
+
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0" />
+    <style>
+        
+        @font-face {
+        font-family: 'HyundaiSansTextKR';
+        src: url('HyundaiSansTextKRRegular.ttf');
+        }
+
+        @font-face {
+        font-family: 'HyundaiSansTextKR';
+        src: url('HyundaiSansTextKRBold.ttf');
+        font-weight: bold;
+        }
+        
+        @font-face {
+        font-family: 'KiaSignature';
+        src: url('KiaSignatureRegular.ttf');
+        }
+        
+        @font-face {
+        font-family: 'KiaSignature';
+        src: url('KiaSignatureBold.ttf');
+        font-weight: bold;
+        }
+        
+        @font-face {
+        font-family: 'BMKIRANGHAERANG';
+        src: url('BMKIRANGHAERANG.ttf');
+        }
+        
+        body {
+          font-family: -apple-system, "Helvetica Neue", "Lucida Grande";
+          margin-top: 0px;
+          margin-left: 0px;
+          margin-right: 0px;
+        }
+        
+        .systemFont {
+            text-align: center;
+        }
+
+        
+        .systemFontBold {
+            text-align: center;
+            font-weight: bold
+        }
+        
+        .hyundaiFont {
+            text-align: center;
+            font-family: 'HyundaiSansTextKR';
+        }
+
+        
+        .hyundaiFontBold {
+            text-align: center;
+            font-family: 'HyundaiSansTextKR';
+            font-weight: bold
+        }
+
+        .kiaFont {
+            text-align: center;
+            font-family: 'KiaSignature';
+        }
+        
+        .kiaFontBold {
+            text-align: center;
+            font-family: 'KiaSignature';
+            font-weight: bold
+        }
+        
+        .baeminFont {
+            text-align: center;
+            font-family: 'BMKIRANGHAERANG';
+        }
+    </style>
+    
+    <script type="text/javascript">
+        function updateFont(fontSize, isBold) {
+            if(isBold) {
+                document.getElementById("systemFont").className = "systemFontBold";
+                document.getElementById("hyundaiFont").className = "hyundaiFontBold";
+                document.getElementById("kiaFont").className = "kiaFontBold";
+            } else {
+                document.getElementById("systemFont").className = "systemFont";
+                document.getElementById("hyundaiFont").className = "hyundaiFont";
+                document.getElementById("kiaFont").className = "kiaFont";
+            }
+            
+            document.getElementById("systemFont").style.fontSize = fontSize + 'px';
+            document.getElementById("hyundaiFont").style.fontSize = fontSize + 'px';
+            document.getElementById("kiaFont").style.fontSize = fontSize + 'px';
+            document.getElementById("baeminFont").style.fontSize = fontSize + 'px';
+        }
+    </script>
+</head>
+
+<body>
+    <div id="systemFont" class='systemFont'>S 동해물과ABcdEFgh!@#$ 012</div>
+    <div id="hyundaiFont" class='hyundaiFont'>H 동해물과ABcdEFgh!@#$ 012</div>
+    <div id="kiaFont" class='kiaFont'>K 동해물과ABcdEFgh!@#$ 012</div>
+    <div id="baeminFont" class='baeminFont'>B 동해물과ABcdEFgh!@#$ 012</div>
+    <br>
+<!--    <p id="demo"></p>-->
+<script type="text/javascript">
+    updateFont(20, false)
+</script>
+</body>
+
+</html>
