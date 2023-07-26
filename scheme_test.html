@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html>
+	<head>	
+		<title>welcome</title>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+        <!--<meta name="viewport" content="user-scalable=no" />-->
+	
+		<meta property="og:title" content="나 이혼 시켜줘! : 코미코(comico) - 한/일 레전드 만화 총출동!">
+		<meta property="og:description" content="하성현 / 대원씨아이 작가의 단행본만화 나 이혼 시켜줘!. 지금 만나보세요!">
+		<meta property="og:image" content="https://img.insight.co.kr/static/2019/04/24/700/16l9qxr1l83y0jy060ow.jpg">
+		<meta property="og:type" content="article"> 
+		<meta property="og:site_name" content="comico">
+		
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@8/dist/sweetalert2.min.js"></script>
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@8/dist/sweetalert2.min.css" id="theme-styles">
+		<style type="text/css">
+			* {
+			    -webkit-touch-callout: none;
+				-webkit-user-select: none;
+				-khtml-user-select: none;
+				-moz-user-select: none;
+				-ms-user-select: none;
+				user-select: none;
+			}
+		</style>
+		
+		<script type="text/javascript">
+            function checkMobile() {
+                var agent = navigator.userAgent.toLowerCase(); //userAgent 값 얻기
+                if ( agent.indexOf('android') > -1) {
+                    return "android";
+                } else if ( agent.indexOf("iphone") > -1||agent.indexOf("ipad") > -1||agent.indexOf("ipod") > -1 ) {
+                    return "ios";
+                } else {
+                    return "other";
+                }
+            }
+
+            function checkBrowser() {
+                var agent = navigator.userAgent.toLowerCase(); //userAgent 값 얻기
+                if ( agent.indexOf('edge') > -1) {
+                    return "edge";
+                } else if (agent.indexOf("chrome") > -1) {
+                    return "chrome";
+                } else if (agent.indexOf("firefox") > -1) {
+                    return "firefox";
+                } else if (agent.indexOf("safari") > -1) {
+                    return "safari";
+                } else {
+                    return "other";
+                }
+            }
+
+            function isSafari() {
+                return checkBrowser() == "safari"
+            }
+
+            function isIOS() {
+                return checkMobile() == "ios"
+            }
+
+            function isAOS() {
+                return checkMobile() == "android"
+            }
+
+			function getMetaContentByName(name,content) {
+				var content = (content==null)?'content':content;
+				
+				var metas = document.getElementsByTagName('meta'); 
+				
+					for (var i=0; i<metas.length; i++) { 
+					if (metas[i].getAttribute("property") == name) { 
+						return metas[i].getAttribute(content); 
+					} 
+				} 
+			
+				return "";
+			}
+
+            function callScheme(url) {
+                let iframe = document.createElement('iframe');
+                iframe.setAttribute('src', url);
+                iframe.setAttribute('height', '1px');
+                iframe.setAttribute('width', '1px');
+                document.documentElement.appendChild(iframe);
+                iframe.parentNode.removeChild(iframe);
+                iframe = null;
+            }
+			
+			function isWebviewClose() { 
+				alert(typeof onWebviewClose == 'function');
+			}
+			
+			function onWebviewClose() {
+				alert('나가고 싶으면 댕댕이를 눌러줘~');
+			}
+			
+			function nwindow(){
+	            var url="https://www.nate.com/";
+	            window.open(url,"","width=400,height=400,left=600");
+	        }
+
+            function closeWebview(nextUrl){
+                callScheme(nextUrl)
+                callScheme("webview://close")
+	        }
+	        
+	        function scoringCameraResult(base64ImageData) {
+	        	alert("scoringCameraResult")
+	        }
+	        
+	        function showUserAgent() {
+	        	alert(navigator.userAgent)
+	        }
+
+	        function paymentCallback(productId, paymentSeq, accessToken, errorCode, errorMessage) {
+	        	var msg = ""
+	        	if (productId) 		{ msg += "productId: <b>" + productId + "</b><br>" }
+	        	if (paymentSeq) 	{ msg += "paymentSeq: <b>" + paymentSeq + "</b><br>" }
+	        	if (accessToken) 	{ msg += "accessToken: <b>" + accessToken + "</b><br>" }
+	        	if (errorCode)		{ msg += "errorCode: <b>" + errorCode + "</b><br>" }
+	        	if (errorMessage)	{ msg += "errorMessage: <b>" + errorMessage + "</b>" }
+	        	
+	        	if(errorCode || errorMessage) {
+	        		Swal.fire({ type: 'error', title: '결제오류', html: msg})
+	        	} else {
+	        		Swal.fire({ type: 'success', title: '결제완료', html: msg})
+	        	}
+	        }
+	        
+	        function accessToken(accessToken, url) {
+	        	alert(accessToken);
+	        	alert(url);
+	        }
+	        
+	    	function showLoading(hideTime) {
+	    		callScheme("webview://loader/show")
+		    	setTimeout(function() {
+					callScheme("webview://loader/hide")
+				}, hideTime);
+			}
+            
+            function showAlert(message) {
+                if (message == null || message == "") {
+                    return
+                }
+                alert(message)
+            }
+            
+            function payment(name, itemId) {
+                callScheme("webview://payment?name=" + name + "&product_id=" + itemId)
+            }
+            
+            function sendMessageDownloadBase64() {
+            	window.webkit.messageHandlers.downloadBase64.postMessage({});
+        	}
+        	
+        	function showSelectBottomSheet() {
+        		callScheme("webview://showSelectBottomSheet?getFunc=getFuncSelectBottomSheet&resultFunc=resultFuncSelectBottomSheet&id=99")
+        	}
+        	
+        	function getFuncSelectBottomSheet(id) {
+        		return "{ \"title\": \"선택제목\", \"labels\": [ \"테스트1\", \"테스트2\" , \"테스트3\" , \"테스트4\"], \"selectedIndex\": 1 }"
+        	}
+        	
+        	function resultFuncSelectBottomSheet(id, selectedIndex) {
+        		alert("resultFuncSelectBottomSheet id:" + id + ", selectedIndex:" + selectedIndex)
+        	}
+        	
+        	function showImageViewer() {
+        		window.location.href = "webview://showImageViewer?getFunc=getFuncImageViewer&id=44"
+        	}
+        	
+        	function getFuncImageViewer(id) {
+        		return "{ \"imageUrls\": [ \"https://s3.ap-northeast-2.amazonaws.com/elasticbeanstalk-ap-northeast-2-176213403491/media/magazine_img/magazine_262/%EC%8D%B8%EB%84%A4%EC%9D%BC.jpg\",  \"https://placeimg.com/1024/768/any?0\", \"https://placeimg.com/1024/768/any?1\", \"https://placeimg.com/1024/768/any?2\", \"https://placeimg.com/1024/768/any?3\", \"https://placeimg.com/1024/768/any?4\" ], \"selectedIndex\": 2 }"
+        	}
+
+			function webviewForeground(isFirstCall) {
+				console.log("webviewForeground isFirstCall:" + isFirstCall);
+			}
+
+			function webviewBackground() {
+				console.log("webviewBackground");
+			}
+        	
+        	function onload() {
+        		$('.text1').focus();
+        	}
+		</script>
+
+	</head>
+
+	<!--<body onload="showAlert('<?php echo $_GET['test']; ?>')">-->
+	<body onload="onload()">
+	<a href="webview://close">
+		<img id="image" src="">
+	</a><br><br>
+    <p></p>
+    <h1><a href="#" onclick="showUserAgent()">User Agent 확인</a></h1>
+	<p></p>
+	<h1><a href="webview://close?nextScheme=testapp%3a%2f%2falarms">웹뷰 닫고 알람 열기</a></h1>
+	<p></p>
+	<h1><a href="webview://toast?message=%eb%aa%a8%eb%b0%94%ec%9d%bc%ea%b0%9c%eb%b0%9c%ed%8c%80">toast</a></h1>
+	<p></p>
+	<h1><a href="webview://share?message=%eb%aa%a8%eb%b0%94%ec%9d%bc%ea%b0%9c%eb%b0%9c%ed%8c%80&url=https%3a%2f%2fwww.naver.com">toast</a></h1>
+	<p></p>
+
+
+
+    <h1><a href="webview://navigationBackGesture?isEnable=true">Back제스처ON</h1><br>
+	<h1><a href="webview://navigationBackGesture?isEnable=false">Back제스처OFF</h1><br>
+	<p></p>
+	<h1><a href="webview://scrollBounce?isEnable=true">Scroll Bounce ON</h1><br>
+	<h1><a href="webview://scrollBounce?isEnable=false">Scroll Bounce OFF</h1><br>
+	<p></p>
+	<h1><a href="webview://logout">로그아웃(웹뷰)</a></h1>
+	
+
+	<h1><a href="#" onclick="showSelectBottomSheet()">Bottom Sheet</a></h1><br>
+	<h1><a href="#" onclick="showImageViewer()">Image Viewer</a></h1><br>
+	
+	
+	<h1><a href="webview://login/facebook?url=https%3a%2f%2fdev-id.iamservice.net%3fname%3d%25eb%2582%2598%25eb%258b%2588%26age%3d27">웹뷰로그인(로그인 웹뷰에서만 가능)</a></h1>
+	<p></p>
+	
+	<p></p>
+	<h1><a href="#" onclick="showLoading(8000)">로딩보기</a></h1>
+	<p></p>
+	<h1><a href="webview://change-data?type=student_code">서버 데이터 업데이트</a></h1>
+	<p></p>
+	<h1><a href="webview://rotation?isLandscape=1">가로 회전</a> &nbsp;&nbsp;&nbsp;&nbsp; <a href="webview://rotation?isLandscape=0">세로 회전</a></h1>
+	<p></p>
+	<h1><a href="webview://show-system-ui">UI보기</a> &nbsp;&nbsp;&nbsp;&nbsp; <a href="webview://hide-system-ui">UI가리기</a></h1>
+	<p></p>
+	<h1><a href="webview://scoringCamera">webview 스킴 OMR카메라촬영</a></h1>
+	<p></p>
+	<h1><a href="webview://children/select">자녀선택팝업</a></h1>
+	<p></p>
+	<h1><a href="http://www.daum.net", target="_blank">새창 링크</a></h1>
+	<p></p>
+	<input type="button" value="새창열기"  onclick="nwindow()"/>
+	<p></p>
+	<p></p>
+        <h1><a href="test://alert?title=타이틀&message=메시지&cancel_title=뭐지?&confirm_title=확인입니당&confirm_url=http://www.naver.com">팝업</a></h1>
+	<p></p>
+	<p></p>
+		
+		<script>
+			document.getElementById("image").src = getMetaContentByName("og:image");
+		</script>
+
+	</body>
+</html>
