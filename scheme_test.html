@@ -200,66 +200,75 @@
     <p></p>
     <h1><a href="#" onclick="showUserAgent()">User Agent 확인</a></h1>
 	<p></p>
+
 	<h1><a href="webview://close?nextScheme=testapp%3a%2f%2falarms">웹뷰 닫고 알람 열기</a></h1>
 	<p></p>
+
 	<h1><a href="webview://toast?message=%eb%aa%a8%eb%b0%94%ec%9d%bc%ea%b0%9c%eb%b0%9c%ed%8c%80">toast</a></h1>
 	<p></p>
+
 	<h1><a href="webview://share?message=%eb%aa%a8%eb%b0%94%ec%9d%bc%ea%b0%9c%eb%b0%9c%ed%8c%80&url=https%3a%2f%2fwww.naver.com">share</a></h1>
 	<p></p>
-	<h1><a href="webview://systemStatusBar?style=dark">상태바 dark 설정</h1><br>
-	<h1><a href="webview://systemStatusBar?style=light">상태바 light 설정</h1><br>
-	<p></p>
-	<h1><a href="webview://systemStatusBar?isShow=true">상태바 show 설정</h1><br>
-	<h1><a href="webview://systemStatusBar?isShow=hide">상태바 hide 설정</h1><br>
-	<p></p>
-	<h1><a href="webview://systemSafeArea?ignores=true">웹뷰 영역 전체 설정</h1><br>
-	<h1><a href="webview://systemSafeArea?ignores=false">웹뷰 영역 기본 설정</h1><br>
+
+	<h1><a href="webview://systemStatusBar?style=dark">상태바 dark 설정</h1>, <a href="webview://systemStatusBar?style=light">상태바 light 설정</h1><br>
 	<p></p>
 
-	<h1><a href="webview://navigation?isShow=true">네비게이션 show 설정</h1><br>
-	<h1><a href="webview://navigation?isShow=false">네비게이션 hide 설정</h1><br>
+	<h1><a href="webview://systemStatusBar?isShow=true">상태바 show 설정</h1>, <a href="webview://systemStatusBar?isShow=hide">상태바 hide 설정</h1><br>
+	<p></p>
 
-	<h1><a href="webview://navigationBackGesture?isEnable=true">Back제스처ON</h1><br>
-	<h1><a href="webview://navigationBackGesture?isEnable=false">Back제스처OFF</h1><br>
+	<h1><a href="webview://systemBackgroundColor?top=ff0000&bottom=00ff00">배경 생상 변경</h1>, <a href="webview://systemBackgroundColor">배경 색상 초기화</h1><br>
 	<p></p>
-	<h1><a href="webview://scrollBounce?isEnable=true">Scroll Bounce ON</h1><br>
-	<h1><a href="webview://scrollBounce?isEnable=false">Scroll Bounce OFF</h1><br>
-	<p></p>
-	<h1><a href="webview://logout">로그아웃(웹뷰)</a></h1>
-	
 
-	<h1><a href="#" onclick="showSelectBottomSheet()">Bottom Sheet</a></h1><br>
-	<h1><a href="#" onclick="showImageViewer()">Image Viewer</a></h1><br>
-	
-	
-	<h1><a href="webview://login/facebook?url=https%3a%2f%2fdev-id.iamservice.net%3fname%3d%25eb%2582%2598%25eb%258b%2588%26age%3d27">웹뷰로그인(로그인 웹뷰에서만 가능)</a></h1>
+	<h1><a href="webview://systemSafeArea?ignores=true">웹뷰 영역 전체 설정</h1>, <a href="webview://systemSafeArea?ignores=false">웹뷰 영역 기본 설정</h1><br>
 	<p></p>
-	
+
+	<h1><a href="webview://navigation?isShow=true">네비게이션 show 설정</h1>, <a href="webview://navigation?isShow=false">네비게이션 hide 설정</h1><br>
 	<p></p>
-	<h1><a href="#" onclick="showLoading(8000)">로딩보기</a></h1>
+
+	<h1><a href="webview://navigationBackGesture?isEnable=true">Back제스처ON</h1>, <a href="webview://navigationBackGesture?isEnable=false">Back제스처OFF</h1><br>
 	<p></p>
-	<h1><a href="webview://change-data?type=student_code">서버 데이터 업데이트</a></h1>
+
+	<h1><a href="webview://scrollBounce?isEnable=true">Scroll Bounce ON</h1><br>, <a href="webview://scrollBounce?isEnable=false">Scroll Bounce OFF</h1><br>
 	<p></p>
+
 	<h1><a href="webview://rotation?isLandscape=1">가로 회전</a> &nbsp;&nbsp;&nbsp;&nbsp; <a href="webview://rotation?isLandscape=0">세로 회전</a></h1>
 	<p></p>
-	<h1><a href="webview://show-system-ui">UI보기</a> &nbsp;&nbsp;&nbsp;&nbsp; <a href="webview://hide-system-ui">UI가리기</a></h1>
-	<p></p>
-	<h1><a href="webview://scoringCamera">webview 스킴 OMR카메라촬영</a></h1>
-	<p></p>
-	<h1><a href="webview://children/select">자녀선택팝업</a></h1>
-	<p></p>
+
 	<h1><a href="http://www.daum.net", target="_blank">새창 링크</a></h1>
 	<p></p>
+
 	<input type="button" value="새창열기"  onclick="nwindow()"/>
 	<p></p>
+
 	<p></p>
-        <h1><a href="test://alert?title=타이틀&message=메시지&cancel_title=뭐지?&confirm_title=확인입니당&confirm_url=http://www.naver.com">팝업</a></h1>
-	<p></p>
-	<p></p>
-		
 		<script>
 			document.getElementById("image").src = getMetaContentByName("og:image");
 		</script>
 
 	</body>
 </html>
+
+<!-- 
+
+
+<h1><a href="webview://show-system-ui">UI보기</a> &nbsp;&nbsp;&nbsp;&nbsp; <a href="webview://hide-system-ui">UI가리기</a></h1>
+<p></p>
+
+<h1><a href="webview://logout">로그아웃(웹뷰)</a></h1>
+<p></p>
+
+<h1><a href="#" onclick="showSelectBottomSheet()">Bottom Sheet</a></h1><br>
+<p></p>
+
+<h1><a href="#" onclick="showImageViewer()">Image Viewer</a></h1><br>
+<p></p>
+
+<h1><a href="#" onclick="showLoading(8000)">로딩보기</a></h1>
+<p></p>
+
+<h1><a href="webview://change-data?type=student_code">서버 데이터 업데이트</a></h1>
+<p></p>
+
+<h1><a href="test://alert?title=타이틀&message=메시지&cancel_title=뭐지?&confirm_title=확인입니당&confirm_url=http://www.naver.com">팝업</a></h1>
+<p></p>
+ -->
