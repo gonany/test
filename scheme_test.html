@@ -102,6 +102,10 @@
 	            window.open(url,"","width=400,height=400,left=600");
 	        }
 
+	    function postMessage(message) {
+		webkit.messageHandlers.jsTest.postMessage(message)
+	    }
+
             function closeWebview(nextUrl){
                 callScheme(nextUrl)
                 callScheme("webview://close")
@@ -200,6 +204,9 @@
     <p></p>
     <h1><a href="#" onclick="showUserAgent()">User Agent 확인</a></h1>
 	<p></p>
+
+	<h1><a href="#" onclick="postMessage("전달완료")">네이티브에 메시지 전달</a></h1><br>
+		
 
 	<h1><a href="webview://close?nextScheme=testapp%3a%2f%2falarms">웹뷰 닫고 알람 열기</a></h1>
 	<p></p>
