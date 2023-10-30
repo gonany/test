@@ -105,6 +105,14 @@
 	    function postMessage(message) {
 		webkit.messageHandlers.jsTest.postMessage(message)
 	    }
+			
+	    function postMessageShowTost(message) {
+		const str = `{
+  "message": "asdfasdf",
+  "durationTime": "long"
+  }`;
+		webkit.messageHandlers.showToast.postMessage(str)
+	    }
 
             function closeWebview(nextUrl){
                 callScheme(nextUrl)
@@ -206,6 +214,8 @@
 	<p></p>
 
 	<h1><a href="#" onclick="postMessage('jsTest로 자바스크립트 전달완료')">네이티브에 메시지 전달(postMessage)</a></h1><br>
+
+	<h1><a href="#" onclick="postMessageShowTost('JS 토스트 테스트')">네이티브에 메시지 전달(ShowTost)</a></h1><br>
 		
 
 	<h1><a href="webview://close?nextScheme=testapp%3a%2f%2falarms">웹뷰 닫고 알람 열기</a></h1>
