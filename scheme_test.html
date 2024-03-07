@@ -126,11 +126,15 @@
 			}
 
 			function sendCommonMessage(funcName, value) {
-			    window.webkit.messageHandlers["HMGCommonInterface_" + funcName].postMessage(value);
+				let newFuncName = "HMGCommonInterface_" + funcName
+				alert(newFuncName, value)
+			    window.webkit.messageHandlers[newFuncName].postMessage(value);
 			}
 
 			function sendOneAppMessage(funcName, value) {
-			    window.webkit.messageHandlers["HMGOneAppInterface_" + funcName].postMessage(value);
+				let newFuncName = "HMGOneAppInterface_" + funcName
+				alert(newFuncName, value)
+			    window.webkit.messageHandlers[newFuncName].postMessage(value);
 			}
 
 			function postMessageShowTost(message) {
