@@ -127,13 +127,13 @@
 
 			function sendCommonMessage(funcName, value) {
 				let newFuncName = "HMGCommonInterface_" + funcName
-				alert(newFuncName, value)
+				debugMessage(newFuncName + " / " + value)
 			    window.webkit.messageHandlers[newFuncName].postMessage(value);
 			}
 
 			function sendOneAppMessage(funcName, value) {
 				let newFuncName = "HMGOneAppInterface_" + funcName
-				alert(newFuncName, value)
+				debugMessage(newFuncName + " / " + value)
 			    window.webkit.messageHandlers[newFuncName].postMessage(value);
 			}
 
@@ -164,7 +164,8 @@
 			}
 
 			function appCallback_cc(data) {
-				alert(data)
+				debugMessage(data)
+				return "OK"
 			}
 
 			function onload() {
