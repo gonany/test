@@ -154,15 +154,13 @@
 			function postMessageGetAuthToken() {
 			    const str = `{
 			  "uid": "123123123",
-			  "resultFuncName": false,
-			  "isToolBar": true,
-			  "appearType": "push"
+			  "resultFuncName": "appCallback_cc"
 			}`;
 				sendOneAppMessage("getAuthToken", str)
 			}
 
-			function resultAuthToken(uid, authToken) {
-				alert(uid + " / " + authToken)
+			function appCallback_cc(data) {
+				alert(data)
 			}
 
 			function onload() {
