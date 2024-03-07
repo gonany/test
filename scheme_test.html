@@ -27,253 +27,175 @@
 		</style>
 		
 		<script type="text/javascript">
-            function checkMobile() {
-                var agent = navigator.userAgent.toLowerCase(); //userAgent 값 얻기
-                if ( agent.indexOf('android') > -1) {
-                    return "android";
-                } else if ( agent.indexOf("iphone") > -1||agent.indexOf("ipad") > -1||agent.indexOf("ipod") > -1 ) {
-                    return "ios";
-                } else {
-                    return "other";
-                }
-            }
-
-            function checkBrowser() {
-                var agent = navigator.userAgent.toLowerCase(); //userAgent 값 얻기
-                if ( agent.indexOf('edge') > -1) {
-                    return "edge";
-                } else if (agent.indexOf("chrome") > -1) {
-                    return "chrome";
-                } else if (agent.indexOf("firefox") > -1) {
-                    return "firefox";
-                } else if (agent.indexOf("safari") > -1) {
-                    return "safari";
-                } else {
-                    return "other";
-                }
-            }
-
-            function isSafari() {
-                return checkBrowser() == "safari"
-            }
-
-            function isIOS() {
-                return checkMobile() == "ios"
-            }
-
-            function isAOS() {
-                return checkMobile() == "android"
-            }
-
-			function getMetaContentByName(name,content) {
-				var content = (content==null)?'content':content;
-				
-				var metas = document.getElementsByTagName('meta'); 
-				
-					for (var i=0; i<metas.length; i++) { 
-					if (metas[i].getAttribute("property") == name) { 
-						return metas[i].getAttribute(content); 
-					} 
-				} 
-			
-				return "";
+			function checkMobile() {
+			    var agent = navigator.userAgent.toLowerCase(); //userAgent 값 얻기
+			    if (agent.indexOf("android") > -1) {
+			        return "android";
+			    } else if (agent.indexOf("iphone") > -1 || agent.indexOf("ipad") > -1 || agent.indexOf("ipod") > -1) {
+			        return "ios";
+			    } else {
+			        return "other";
+			    }
 			}
 
-            function callScheme(url) {
-                let iframe = document.createElement('iframe');
-                iframe.setAttribute('src', url);
-                iframe.setAttribute('height', '1px');
-                iframe.setAttribute('width', '1px');
-                document.documentElement.appendChild(iframe);
-                iframe.parentNode.removeChild(iframe);
-                iframe = null;
-            }
-			
-			function isWebviewClose() { 
-				alert(typeof onWebviewClose == 'function');
+			function checkBrowser() {
+			    var agent = navigator.userAgent.toLowerCase(); //userAgent 값 얻기
+			    if (agent.indexOf("edge") > -1) {
+			        return "edge";
+			    } else if (agent.indexOf("chrome") > -1) {
+			        return "chrome";
+			    } else if (agent.indexOf("firefox") > -1) {
+			        return "firefox";
+			    } else if (agent.indexOf("safari") > -1) {
+			        return "safari";
+			    } else {
+			        return "other";
+			    }
 			}
-			
+
+			function isSafari() {
+			    return checkBrowser() == "safari";
+			}
+
+			function isIOS() {
+			    return checkMobile() == "ios";
+			}
+
+			function isAOS() {
+			    return checkMobile() == "android";
+			}
+
+			function getMetaContentByName(name, content) {
+			    var content = content == null ? "content" : content;
+
+			    var metas = document.getElementsByTagName("meta");
+
+			    for (var i = 0; i < metas.length; i++) {
+			        if (metas[i].getAttribute("property") == name) {
+			            return metas[i].getAttribute(content);
+			        }
+			    }
+
+			    return "";
+			}
+
+			function callScheme(url) {
+			    let iframe = document.createElement("iframe");
+			    iframe.setAttribute("src", url);
+			    iframe.setAttribute("height", "1px");
+			    iframe.setAttribute("width", "1px");
+			    document.documentElement.appendChild(iframe);
+			    iframe.parentNode.removeChild(iframe);
+			    iframe = null;
+			}
+
+			function isWebviewClose() {
+			    alert(typeof onWebviewClose == "function");
+			}
+
 			function onWebviewClose() {
-				alert('나가고 싶으면 댕댕이를 눌러줘~');
+			    alert("나가고 싶으면 댕댕이를 눌러줘~");
 			}
-			
-			function nwindow(){
-	            var url="https://www.nate.com/";
-	            window.open(url,"","width=400,height=400,left=600");
-	        }
 
-	    function postMessage(message) {
-		webkit.messageHandlers.jsTest.postMessage(message)
-	    }
-			
-	    function postMessageShowTost(message) {
-		const str = `{
-  "message": "JS 토스트 메시지",
-  "durationTime": "long"
-  }`;
-		webkit.messageHandlers.showToast.postMessage(str)
-	    }
-
-		function postMessageOpenWebView(url) {
-		const str = `{
-  "url": "https://naver.com",
-  "isNavigationBar": false,
-  "isToolBar": true,
-  "appearType": "push"
-}`;
-		webkit.messageHandlers.openWebView.postMessage(str)
-	    }
-
-            function closeWebview(nextUrl){
-                // callScheme(nextUrl)
-                // callScheme("webview://close")
-		window.close();
-	        }
-	        
-	        function scoringCameraResult(base64ImageData) {
-	        	alert("scoringCameraResult")
-	        }
-	        
-	        function showUserAgent() {
-	        	alert(navigator.userAgent)
-	        }
-
-	        function paymentCallback(productId, paymentSeq, accessToken, errorCode, errorMessage) {
-	        	var msg = ""
-	        	if (productId) 		{ msg += "productId: <b>" + productId + "</b><br>" }
-	        	if (paymentSeq) 	{ msg += "paymentSeq: <b>" + paymentSeq + "</b><br>" }
-	        	if (accessToken) 	{ msg += "accessToken: <b>" + accessToken + "</b><br>" }
-	        	if (errorCode)		{ msg += "errorCode: <b>" + errorCode + "</b><br>" }
-	        	if (errorMessage)	{ msg += "errorMessage: <b>" + errorMessage + "</b>" }
-	        	
-	        	if(errorCode || errorMessage) {
-	        		Swal.fire({ type: 'error', title: '결제오류', html: msg})
-	        	} else {
-	        		Swal.fire({ type: 'success', title: '결제완료', html: msg})
-	        	}
-	        }
-	        
-	        function accessToken(accessToken, url) {
-	        	alert(accessToken);
-	        	alert(url);
-	        }
-	        
-	    	function showLoading(hideTime) {
-	    		callScheme("webview://loader/show")
-		    	setTimeout(function() {
-					callScheme("webview://loader/hide")
-				}, hideTime);
+			function scoringCameraResult(base64ImageData) {
+			    alert("scoringCameraResult");
 			}
-            
-            function showAlert(message) {
-                if (message == null || message == "") {
-                    return
-                }
-                alert(message)
-            }
-            
-            function payment(name, itemId) {
-                callScheme("webview://payment?name=" + name + "&product_id=" + itemId)
-            }
-            
-            function sendMessageDownloadBase64() {
-            	window.webkit.messageHandlers.downloadBase64.postMessage({});
-        	}
-        	
-        	function showSelectBottomSheet() {
-        		callScheme("webview://showSelectBottomSheet?getFunc=getFuncSelectBottomSheet&resultFunc=resultFuncSelectBottomSheet&id=99")
-        	}
-        	
-        	function getFuncSelectBottomSheet(id) {
-        		return "{ \"title\": \"선택제목\", \"labels\": [ \"테스트1\", \"테스트2\" , \"테스트3\" , \"테스트4\"], \"selectedIndex\": 1 }"
-        	}
-        	
-        	function resultFuncSelectBottomSheet(id, selectedIndex) {
-        		alert("resultFuncSelectBottomSheet id:" + id + ", selectedIndex:" + selectedIndex)
-        	}
-        	
-        	function showImageViewer() {
-        		window.location.href = "webview://showImageViewer?getFunc=getFuncImageViewer&id=44"
-        	}
-        	
-        	function getFuncImageViewer(id) {
-        		return "{ \"imageUrls\": [ \"https://s3.ap-northeast-2.amazonaws.com/elasticbeanstalk-ap-northeast-2-176213403491/media/magazine_img/magazine_262/%EC%8D%B8%EB%84%A4%EC%9D%BC.jpg\",  \"https://placeimg.com/1024/768/any?0\", \"https://placeimg.com/1024/768/any?1\", \"https://placeimg.com/1024/768/any?2\", \"https://placeimg.com/1024/768/any?3\", \"https://placeimg.com/1024/768/any?4\" ], \"selectedIndex\": 2 }"
-        	}
+
+			function showUserAgent() {
+			    alert(navigator.userAgent);
+			}
+
+			function showAlert(message) {
+			    if (message == null || message == "") {
+			        return;
+			    }
+			    alert(message);
+			}
 
 			function webviewForeground(isFirstCall) {
-				console.log("webviewForeground isFirstCall:" + isFirstCall);
+			    console.log("webviewForeground isFirstCall:" + isFirstCall);
 			}
 
 			function webviewBackground() {
-				console.log("webviewBackground");
+			    console.log("webviewBackground");
 			}
-        	
-        	function onload() {
-        		$('.text1').focus();
-        	}
+
+			function newWindow() {
+			    var url = "https://www.nate.com/";
+			    window.open(url, "", "width=400,height=400,left=600");
+			}
+
+			function sendCommonMessage(funcName, value) {
+			    window.webkit.messageHandlers["HMGCommonInterface_" + funcName].postMessage(value);
+			}
+
+			function sendOneAppMessage(funcName, value) {
+			    window.webkit.messageHandlers["HMGOneAppInterface_" + funcName].postMessage(value);
+			}
+
+			function postMessageShowTost(message) {
+			    const str = `{
+			  "message": "JS 토스트 메시지",
+			  "durationTime": "long"
+			  }`;
+			  sendCommonMessage("showToast", str)
+			}
+
+			function postMessageOpenWebView(url) {
+			    const str = `{
+			  "url": "https://naver.com",
+			  "isNavigationBar": false,
+			  "isToolBar": true,
+			  "appearType": "push"
+			}`;
+				sendCommonMessage("openWebView", str)
+			}
+
+			function postMessageGetAuthToken() {
+			    const str = `{
+			  "uid": "123123123",
+			  "resultFuncName": false,
+			  "isToolBar": true,
+			  "appearType": "push"
+			}`;
+				sendOneAppMessage("getAuthToken", str)
+			}
+
+			function resultAuthToken(uid, authToken) {
+				alert(uid + " / " + authToken)
+			}
+
+			function onload() {
+			    $(".text1").focus();
+			}
+
 		</script>
 
 	</head>
 
-	<!--<body onload="showAlert('<?php echo $_GET['test']; ?>')">-->
 	<body onload="onload()">
 	<a href="#" onclick="closeWebview()"><img id="image" src="">강아지</a><br><br>
     <p></p>
     <h1><a href="#" onclick="showUserAgent()">User Agent 확인</a></h1>
 	<p></p>
-
-	<a href="https://www.kia.com/content/dam/kwp/kr/ko/vehicles/represent/krcv140/ev6-gt_cvjj5vga3_a_klm.png" download>download</a><br><br>
-	<a href="https://www.kia.com/content/dam/kwp/kr/ko/vehicles/represent/krcv140/ev6-gt_cvjj5vga3_a_klm.png" target="_blank" download>download _blank</a><br><br>
-
-
-		<a href="https://download.brother.com/welcome/doc003127/hl1110_kor_usr.pdf">pdf no download</a><br><br>
-		<a href="https://download.brother.com/welcome/doc003127/hl1110_kor_usr.pdf" download="hl1110_kor_usr.pdf">pdf yes download</a><br><br>
-
-	<h1><a href="#" onclick="postMessage('jsTest로 자바스크립트 전달완료')">네이티브에 메시지 전달(postMessage)</a></h1><br>
-
-	<h1><a href="#" onclick="postMessageShowTost('JS 토스트 테스트')">네이티브에 메시지 전달(ShowTost)</a></h1><br>
-	<h1><a href="#" onclick="postMessageOpenWebView('https://www.naver.com')">네이티브 팝업(ShowTost)</a></h1><br>
-
-	<h1><a href="webview://close?nextScheme=testapp%3a%2f%2falarms">웹뷰 닫고 알람 열기</a></h1>
+	<p></p>
+	<h1># 공통 인터페이스</h1><br>
+	<h2><a href="#" onclick="postMessageShowTost('JS 토스트 테스트')">네이티브에 메시지 전달(ShowTost)</a></h2><br>
+	<h2><a href="#" onclick="postMessageOpenWebView('https://www.naver.com')">네이티브 팝업(ShowTost)</a></h2><br>
+	
+	<p></p>
+	<p></p>
+	<h1># 원앱 인터페이스</h1><br>
+	<h2><a href="#" onclick="postMessage('jsTest로 자바스크립트 전달완료')">네이티브에 메시지 전달(postMessage)</a></h2><br>
+	<p></p>
 	<p></p>
 
-	<h1><a href="tel://01012341234">전화번호1</a></h1>, <h1><a href="tel://telprompt">전화번호2</a></h1>, <h1><a href="sms://01012341234">SMS</a></h1>, <h1><a href="mailto:example@naver.com">MAIL</a></h1>, 
-	<p></p>
+	<input type="button" value="새창열기"  onclick="newWindow()"/>
 
-	<h1><a href="webview://toast?message=%eb%aa%a8%eb%b0%94%ec%9d%bc%ea%b0%9c%eb%b0%9c%ed%8c%80">toast</a></h1>
-	<p></p>
-
-	<h1><a href="webview://share?message=%eb%aa%a8%eb%b0%94%ec%9d%bc%ea%b0%9c%eb%b0%9c%ed%8c%80&url=https%3a%2f%2fwww.naver.com">share</a></h1>
-	<p></p>
-
-	<h1><a href="webview://systemStatusBar?style=dark">상태바 dark 설정, &nbsp;&nbsp; <a href="webview://systemStatusBar?style=light">상태바 light 설정</h1><br>
-	<p></p>
-
-	<h1><a href="webview://systemStatusBar?isShow=true">상태바 show 설정, &nbsp;&nbsp; <a href="webview://systemStatusBar?isShow=hide">상태바 hide 설정</h1><br>
-	<p></p>
-
-	<h1><a href="webview://systemBackgroundColor?top=ff0000&bottom=00ff00">배경 생상 변경, &nbsp;&nbsp; <a href="webview://systemBackgroundColor">배경 색상 초기화</h1><br>
-	<p></p>
-
-	<h1><a href="webview://systemSafeArea?ignores=true">웹뷰 영역 전체 설정, &nbsp;&nbsp; <a href="webview://systemSafeArea?ignores=false">웹뷰 영역 기본 설정</h1><br>
-	<p></p>
-
-	<h1><a href="webview://navigation?isShow=true">네비게이션 show 설정, &nbsp;&nbsp; <a href="webview://navigation?isShow=false">네비게이션 hide 설정</h1><br>
-	<p></p>
-
-	<h1><a href="webview://navigationBackGesture?isEnable=true">Back제스처ON, &nbsp;&nbsp; <a href="webview://navigationBackGesture?isEnable=false">Back제스처OFF</h1><br>
-	<p></p>
-
-	<h1><a href="webview://scrollBounce?isEnable=true">Scroll Bounce ON, &nbsp;&nbsp; <a href="webview://scrollBounce?isEnable=false">Scroll Bounce OFF</h1><br>
-	<p></p>
-
-	<h1><a href="webview://rotation?isLandscape=1">가로 회전</a>, &nbsp;&nbsp; <a href="webview://rotation?isLandscape=0">세로 회전</a></h1>
-	<p></p>
-
-	<h1><a href="http://www.daum.net", target="_blank">새창 링크</a></h1>
-	<p></p>
-
-	<input type="button" value="새창열기"  onclick="nwindow()"/>
+	<h2><a href="tel://01012341234">전화번호1</a></h2>, 
+	<h2><a href="tel://telprompt">전화번호2</a></h2>, 
+	<h2><a href="sms://01012341234">SMS</a></h2>, 
+	<h2><a href="mailto:example@naver.com">MAIL</a></h2>, 
 	<p></p>
 
 	<p><h1>1<h1></p><br>
@@ -295,28 +217,3 @@
 
 	</body>
 </html>
-
-<!-- 
-
-
-<h1><a href="webview://show-system-ui">UI보기</a> &nbsp;&nbsp;&nbsp;&nbsp; <a href="webview://hide-system-ui">UI가리기</a></h1>
-<p></p>
-
-<h1><a href="webview://logout">로그아웃(웹뷰)</a></h1>
-<p></p>
-
-<h1><a href="#" onclick="showSelectBottomSheet()">Bottom Sheet</a></h1><br>
-<p></p>
-
-<h1><a href="#" onclick="showImageViewer()">Image Viewer</a></h1><br>
-<p></p>
-
-<h1><a href="#" onclick="showLoading(8000)">로딩보기</a></h1>
-<p></p>
-
-<h1><a href="webview://change-data?type=student_code">서버 데이터 업데이트</a></h1>
-<p></p>
-
-<h1><a href="test://alert?title=타이틀&message=메시지&cancel_title=뭐지?&confirm_title=확인입니당&confirm_url=http://www.naver.com">팝업</a></h1>
-<p></p>
- -->
