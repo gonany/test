@@ -163,6 +163,11 @@
 				sendOneAppMessage("getAuthToken", str)
 			}
 
+			function postMessageExit() {
+			    const str = `{"nextScheme":"app://availablevehicles"}`;
+				sendOneAppMessage("exit", str)
+			}
+
 			function appCallback_cc(data) {
 				debugMessage(data)
 				// return "OK"
@@ -196,6 +201,7 @@
 	<p></p>
 	<h1># 원앱 인터페이스</h1><br>
 	<h2><a href="#" onclick="postMessageGetAuthToken()">GetAuthToken</a></h2><br>
+	<h2><a href="#" onclick="postMessageExit()">postMessageExit</a></h2><br>
 	<p></p>
 	<p></p>
 
