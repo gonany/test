@@ -168,6 +168,11 @@
 				sendOneAppMessage("exit", str)
 			}
 
+			function postMessageAgreeTerms() {
+			    const str = `{"termGroupType":"KR_CCI_TOTAL"}`;
+				sendOneAppMessage("exit", str)
+			}
+
 			function appCallback_cc(data) {
 				debugMessage(data)
 				// return "OK"
@@ -202,6 +207,7 @@
 	<h1># 원앱 인터페이스</h1><br>
 	<h2><a href="#" onclick="postMessageGetAuthToken()">GetAuthToken</a></h2><br>
 	<h2><a href="#" onclick="postMessageExit()">postMessageExit</a></h2><br>
+	<h2><a href="#" onclick="postMessageAgreeTerms()">postMessageAgreeTerms</a></h2><br>
 	<p></p>
 	<p></p>
 
