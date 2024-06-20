@@ -137,6 +137,11 @@
 			    window.webkit.messageHandlers[newFuncName].postMessage(value);
 			}
 
+			function postClose(message) {
+			    const str = `{}`;
+			  	sendCommonMessage("close", str)
+			}
+
 			function postMessageShowTost(message) {
 			    const str = `{
 			  "message": "JS 토스트 메시지",
@@ -199,6 +204,7 @@
 	<p></p>
 	<p></p>
 	<h1># 공통 인터페이스</h1><br>
+	<h2><a href="#" onclick="postClose()">close</a></h2><br>
 	<h2><a href="#" onclick="postMessageShowTost('JS 토스트 테스트')">네이티브에 메시지 전달(ShowTost)</a></h2><br>
 	<h2><a href="#" onclick="postMessageOpenWebView('https://www.naver.com')">네이티브 팝업(ShowTost)</a></h2><br>
 	
