@@ -168,6 +168,17 @@
 				sendOneAppMessage("getAuthToken", str)
 			}
 
+			function postMessageSetBrightness() {
+			    const str = `{
+			  "uid": "123123123",
+			  "contents": {
+			  	"brightness": 1.0
+			  },
+			  "resultFuncName": "appCallback_cc"
+			}`;
+				sendOneAppMessage("getAuthToken", str)
+			}
+
 			function postMessageExit() {
 			    const str = `{"nextScheme":"app://availablevehicles"}`;
 				sendOneAppMessage("exit", str)
@@ -214,6 +225,7 @@
 	<h2><a href="#" onclick="postMessageGetAuthToken()">GetAuthToken</a></h2><br>
 	<h2><a href="#" onclick="postMessageExit()">postMessageExit</a></h2><br>
 	<h2><a href="#" onclick="postMessageAgreeTerms()">postMessageAgreeTerms</a></h2><br>
+	<h2><a href="#" onclick="postMessageSetBrightness()">postMessageSetBrightness</a></h2><br>
 	<p></p>
 	<p></p>
 
