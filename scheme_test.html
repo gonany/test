@@ -160,23 +160,21 @@
 				sendCommonMessage("openWebView", str)
 			}
 
+			function postMessageSetBrightness() {
+			    const str = `{
+			  "uid": "123123123",
+			  "contents": {"brightness": 1.0},
+			  "resultFuncName": "appCallback_cc"
+			}`;
+				sendCommonMessage("screenBrightness", str)
+			}
+
 			function postMessageGetAuthToken() {
 			    const str = `{
 			  "uid": "123123123",
 			  "resultFuncName": "appCallback_cc"
 			}`;
 				sendOneAppMessage("getAuthToken", str)
-			}
-
-			function postMessageSetBrightness() {
-			    const str = `{
-			  "uid": "123123123",
-			  "contents": {
-			  	"brightness": 1.0
-			  },
-			  "resultFuncName": "appCallback_cc"
-			}`;
-				sendOneAppMessage("screenBrightness", str)
 			}
 
 			function postMessageExit() {
@@ -218,6 +216,7 @@
 	<h2><a href="#" onclick="postClose()">close</a></h2><br>
 	<h2><a href="#" onclick="postMessageShowTost('JS 토스트 테스트')">네이티브에 메시지 전달(ShowTost)</a></h2><br>
 	<h2><a href="#" onclick="postMessageOpenWebView('https://www.naver.com')">네이티브 팝업(ShowTost)</a></h2><br>
+	<h2><a href="#" onclick="postMessageSetBrightness()">postMessageSetBrightness</a></h2><br>
 	
 	<p></p>
 	<p></p>
@@ -225,7 +224,6 @@
 	<h2><a href="#" onclick="postMessageGetAuthToken()">GetAuthToken</a></h2><br>
 	<h2><a href="#" onclick="postMessageExit()">postMessageExit</a></h2><br>
 	<h2><a href="#" onclick="postMessageAgreeTerms()">postMessageAgreeTerms</a></h2><br>
-	<h2><a href="#" onclick="postMessageSetBrightness()">postMessageSetBrightness</a></h2><br>
 	<p></p>
 	<p></p>
 
