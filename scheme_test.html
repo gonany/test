@@ -207,6 +207,9 @@
 			}
 
 			function debugMessage(msg) {
+				var element = document.getElementById("debugMessageCount");
+				element.innerText = 'message count: ' + msg.count;
+
 				var element = document.getElementById("debugMessage");
 				element.innerText = msg;
 			}
@@ -217,6 +220,7 @@
 
 	<body onload="onload()">
 	<a href="#" onclick="closeWebview()">
+    <div id="debugMessageCount"></div>
 	<textarea id="debugMessage" rows="10" cols="50">디버그 메시지 출력</textarea>
     <p></p>
     <h1><a href="#" onclick="showUserAgent()">User Agent 확인</a></h1>
