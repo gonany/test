@@ -142,6 +142,20 @@
 			  	sendCommonMessage("close", str)
 			}
 
+			function copyDebugMessageToClipboard() {
+            const textarea = document.getElementById('debugMessage');
+
+            textarea.select();
+            textarea.setSelectionRange(0, 999999999);
+
+            try {
+                document.execCommand('copy');
+                alert('복사되었습니다!');
+            } catch (err) {
+                alert('복사 실패: ' + err);
+            }
+        }
+
 			function postMessageShowTost(message) {
 			    const str = `{
 			  "message": "JS 토스트 메시지",
@@ -220,8 +234,9 @@
 
 	<body onload="onload()">
 	<a href="#" onclick="closeWebview()">
-    <div id="debugMessageCount"></div>
+    <div id="debugMessageCount"></div> | <button onclick="copyDebugMessageToClipboard()">디버그 메시지 클립보드에 복사</button>
 	<textarea id="debugMessage" rows="10" cols="50">디버그 메시지 출력</textarea>
+
     <p></p>
     <h1><a href="#" onclick="showUserAgent()">User Agent 확인</a></h1>
 	<p></p>
