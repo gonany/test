@@ -150,7 +150,6 @@
 
             try {
                 document.execCommand('copy');
-                textarea.setSelectionRange(textarea.value.length, textarea.value.length);
                 alert('복사되었습니다!');
             } catch (err) {
                 alert('복사 실패: ' + err);
@@ -196,7 +195,7 @@
 			function postMessageGetMaskImage() {
 			    const str = `{
 			  "uid": "123123123",
-			  "resultFuncName": "appCallback_cc",
+			  "resultFuncName": "resultMaskImageCallback_cc",
 			  "limitSize": 5
 			}`;
 				sendOneAppMessage("getMaskImage", str)
@@ -210,6 +209,25 @@
 			function postMessageAgreeTerms() {
 			    const str = `{"termGroupType":"KR_CCI_TOTAL"}`;
 				sendOneAppMessage("agreeTerms", str)
+			}
+
+			function resultMaskImageCallback_cc(data) {
+				debugMessage(data)
+
+        		var jsonObject = JSON.parse(jsonString);
+        		var base64Image = jsonObject.result.image;
+        		base64ToImage("data:image/jpeg;base64,"+base64Image)
+			}
+
+			function base64ToImage(base64Image) {
+		        // HTML에 표시
+		        var outputDiv = document.getElementById('output');
+
+		        // 이미지 태그 생성 및 추가
+		        var img = document.createElement('img');
+		        img.src = base64Image;
+		        img.alt = 'Extracted Base64 Image';
+		        outputDiv.appendChild(img);
 			}
 
 			function appCallback_cc(data) {
