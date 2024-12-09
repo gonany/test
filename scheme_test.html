@@ -221,13 +221,9 @@
 
 			function base64ToImage(base64Image) {
 		        // HTML에 표시
-		        var outputDiv = document.getElementById('output');
-
-		        // 이미지 태그 생성 및 추가
-		        var img = document.createElement('img');
+		        var outputDiv = document.getElementById('outputImage');
 		        img.src = base64Image;
 		        img.alt = 'Extracted Base64 Image';
-		        outputDiv.appendChild(img);
 			}
 
 			function appCallback_cc(data) {
@@ -285,6 +281,7 @@
 	<h2><a href="sms://01012341234">SMS</a></h2>, 
 	<h2><a href="mailto:example@naver.com">MAIL</a></h2>, 
 	<p></p>
+	<img id="outputImage"></img>
 
 	<p><h1>1<h1></p><br>
 	<p><h1>2<h1></p><br>
