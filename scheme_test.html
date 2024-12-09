@@ -177,6 +177,16 @@
 				sendOneAppMessage("getAuthToken", str)
 			}
 
+
+			function postMessageGetMaskImage() {
+			    const str = `{
+			  "uid": "123123123",
+			  "resultFuncName": "appCallback_cc",
+			  "limitSize": 5
+			}`;
+				sendOneAppMessage("getMaskImage", str)
+			}
+
 			function postMessageExit() {
 			    const str = `{"nextScheme":"app://availablevehicles"}`;
 				sendOneAppMessage("exit", str)
@@ -222,8 +232,9 @@
 	<p></p>
 	<h1># 원앱 인터페이스</h1><br>
 	<h2><a href="#" onclick="postMessageGetAuthToken()">GetAuthToken</a></h2><br>
-	<h2><a href="#" onclick="postMessageExit()">postMessageExit</a></h2><br>
-	<h2><a href="#" onclick="postMessageAgreeTerms()">postMessageAgreeTerms</a></h2><br>
+	<h2><a href="#" onclick="postMessageExit()">Exit</a></h2><br>
+	<h2><a href="#" onclick="postMessageAgreeTerms()">AgreeTerms</a></h2><br>
+	<h2><a href="#" onclick="postMessageGetMaskImage()">GetMaskImage</a></h2><br>
 	<p></p>
 	<p></p>
 
