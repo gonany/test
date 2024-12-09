@@ -150,6 +150,7 @@
 
             try {
                 document.execCommand('copy');
+                textarea.setSelectionRange(textarea.value.length, textarea.value.length);
                 alert('복사되었습니다!');
             } catch (err) {
                 alert('복사 실패: ' + err);
