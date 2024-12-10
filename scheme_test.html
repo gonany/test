@@ -29,57 +29,101 @@
 
 		body {
 		    font-family: 'Arial', sans-serif;
-		    background-color: #f4f4f9;
+		    background-color: #f9f9f9;
 		    margin: 0;
 		    padding: 0;
 		    box-sizing: border-box;
 		}
 
-		a {
-		    text-decoration: none; /* 기본 밑줄 제거 */
-		    color: #333; /* 기본 텍스트 색상 */
-		    transition: color 0.3s ease, transform 0.2s ease; /* 부드러운 전환 효과 */
-		}
-5
-		a:hover {
-		    color: #007bff; /* 마우스 올렸을 때 파란색으로 변경 */
-		    transform: scale(1.05); /* 마우스를 올렸을 때 살짝 커지는 효과 */
-		}
-
-
-		ul {
-		    list-style: none; /* 기본 점을 제거 */
-		    padding: 0;
-		    margin: 0;
-		}
-
+		/* li 스타일 */
 		li {
-		    margin: 10px 0; /* 각 항목 간의 간격 */
-		    padding: 10px;
-		    border-radius: 8px; /* 둥근 모서리 */
-		    background-color: #fff; /* 배경색 */
-		    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 미세한 그림자 */
-		    transition: background-color 0.3s ease; /* 배경색 전환 효과 */
+		  list-style-type: none;
+		  margin-bottom: 10px;
 		}
 
-		li:hover {
-		    background-color: #f0f8ff; /* 마우스 올렸을 때 배경색 변경 */
-		    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 그림자 효과 강화 */
+		li a {
+		  text-decoration: none;
+		  color: #007bff;
+		  font-weight: 600;
 		}
 
-		ul.styled-list {
-		    padding-left: 20px; /* 왼쪽 여백 추가 */
+		li a:hover {
+		  color: #0056b3;
+		  text-decoration: underline;
 		}
 
-		ul.styled-list li::before {
-		    content: "• "; /* 항목 앞에 점을 추가 */
-		    color: #007bff; /* 점 색상 */
-		    font-size: 18px; /* 점 크기 */
+		/* 버튼 스타일 */
+		button {
+		  background-color: #007bff;
+		  color: white;
+		  font-size: 16px;
+		  padding: 10px 20px;
+		  border: none;
+		  border-radius: 5px;
+		  cursor: pointer;
+		  transition: background-color 0.3s ease, transform 0.2s ease;
 		}
 
-		ul.styled-list li a {
-		    font-weight: bold; /* 링크 텍스트를 굵게 */
-		    color: #333; /* 기본 텍스트 색상 */
+		button:hover {
+		  background-color: #0056b3;
+		  transform: translateY(-2px);
+		}
+
+		button:active {
+		  background-color: #004085;
+		  transform: translateY(0);
+		}
+
+		button:disabled {
+		  background-color: #c6c6c6;
+		  cursor: not-allowed;
+		}
+
+		/* input 스타일 */
+		input[type="text"],
+		input[type="password"],
+		input[type="email"],
+		input[type="number"] {
+		  width: 100%;
+		  padding: 12px 15px;
+		  margin: 8px 0;
+		  border: 2px solid #ddd;
+		  border-radius: 5px;
+		  font-size: 16px;
+		  transition: border-color 0.3s ease;
+		}
+
+		input[type="text"]:focus,
+		input[type="password"]:focus,
+		input[type="email"]:focus,
+		input[type="number"]:focus {
+		  border-color: #007bff;
+		  outline: none;
+		}
+
+		input::placeholder {
+		  color: #aaa;
+		}
+
+		/* textarea 스타일 */
+		textarea {
+		  width: 100%;
+		  padding: 12px 15px;
+		  margin: 8px 0;
+		  border: 2px solid #ddd;
+		  border-radius: 5px;
+		  font-size: 16px;
+		  resize: vertical;
+		  transition: border-color 0.3s ease;
+		}
+
+		textarea:focus {
+		  border-color: #007bff;
+		  outline: none;
+		}
+
+		textarea::placeholder {
+		  color: #aaa;
 		}
 
         #outputImage {
