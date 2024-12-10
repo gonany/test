@@ -227,11 +227,10 @@
 
 			function appCallback_cc(data) {
 				debugMessage(data)
-				// return "OK"
 			}
 
 			function onload() {
-			    $(".text1").focus();
+				debugMessage(navigator.userAgent)
 			}
 
 			function debugMessage(msg) {
@@ -247,40 +246,75 @@
 	</head>
 
 	<body onload="onload()">
+
 	<p></p>
-    <p></p>
 	<textarea id="debugMessage" rows="20" cols="55">디버그 메시지 출력</textarea>
 	<div id="debugMessageCount"></div>
 	<button onclick="copyDebugMessageToClipboard()">디버그 메시지 클립보드에 복사</button>
 	<p></p>
 	<img id="outputImage" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAHElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO9TXL0Y4OHwAAAABJRU5ErkJggg=="/>
+
     <p></p>
-    <h1><a href="#" onclick="showUserAgent()">User Agent 확인</a></h1>
+	<p></p>
+	<h1># 공통 인터페이스</h1>
+	<ul>
+		<li>
+          <a href="#" onclick="showUserAgent()">User Agent 확인</a>
+        </li>
+        <li>
+          <a href="#" onclick="postClose()">close</a>
+        </li>
+        <li>
+          <a href="#" onclick="postMessageShowTost('JS 토스트 테스트')">네이티브에 메시지 전달(ShowTost)</a>
+        </li>
+        <li>
+          <a href="#" onclick="postMessageOpenWebView('https://www.naver.com')">네이티브 팝업(ShowTost)</a>
+        </li>
+        <li>
+          <a href="#" onclick="postMessageSetBrightness()">postMessageSetBrightness</a>
+        </li>
+	</ul>
+
 	<p></p>
 	<p></p>
-	<h1># 공통 인터페이스</h1><br>
-	<h2><a href="#" onclick="postClose()">close</a></h2><br>
-	<h2><a href="#" onclick="postMessageShowTost('JS 토스트 테스트')">네이티브에 메시지 전달(ShowTost)</a></h2><br>
-	<h2><a href="#" onclick="postMessageOpenWebView('https://www.naver.com')">네이티브 팝업(ShowTost)</a></h2><br>
-	<h2><a href="#" onclick="postMessageSetBrightness()">postMessageSetBrightness</a></h2><br>
+
+	<h1># 원앱 인터페이스</h1><br>
+	<ul>
+        <li>
+          <a href="#" onclick="postMessageGetAuthToken()">GetAuthToken</a>
+        </li>
+        <li>
+          <a href="#" onclick="postMessageExit()">Exit</a>
+        </li>
+        <li>
+          <a href="#" onclick="postMessageAgreeTerms()">AgreeTerms</a>
+        </li>
+        <li>
+		  <a href="#" onclick="postMessageGetMaskImage()">GetMaskImage</a>
+        </li>
+	</ul>
 	
 	<p></p>
 	<p></p>
-	<h1># 원앱 인터페이스</h1><br>
-	<h2><a href="#" onclick="postMessageGetAuthToken()">GetAuthToken</a></h2><br>
-	<h2><a href="#" onclick="postMessageExit()">Exit</a></h2><br>
-	<h2><a href="#" onclick="postMessageAgreeTerms()">AgreeTerms</a></h2><br>
-	<h2><a href="#" onclick="postMessageGetMaskImage()">GetMaskImage</a></h2><br>
-	<p></p>
-	<p></p>
 
-	<input type="button" value="새창열기"  onclick="newWindow()"/>
-
-	<h2><a href="tel://01012341234">전화번호1</a></h2>, 
-	<h2><a href="tel://telprompt">전화번호2</a></h2>, 
-	<h2><a href="sms://01012341234">SMS</a></h2>, 
-	<h2><a href="mailto:example@naver.com">MAIL</a></h2>, 
-	<p></p>
+	<h1># 기타</h1><br>
+	<ul>
+        <li>
+          <input type="button" value="새창열기"  onclick="newWindow()"/>
+        </li>
+        <li>
+          <h2><a href="tel://01012341234">전화번호1</a></h2>
+        </li>
+        <li>
+          <h2><a href="tel://telprompt">전화번호2</a></h2>
+        </li>
+        <li>
+		  <h2><a href="sms://01012341234">SMS</a></h2>
+        </li>
+        <li>
+			<h2><a href="mailto:example@naver.com">MAIL</a></h2>
+        </li>
+	</ul>
 
 	<p><h1>1<h1></p><br>
 	<p><h1>2<h1></p><br>
@@ -295,9 +329,9 @@
 	<h1>스크롤테스트</h1>
 		
 		
-		<script>
-			document.getElementById("image").src = getMetaContentByName("og:image");
-		</script>
+	<script>
+		document.getElementById("image").src = getMetaContentByName("og:image");
+	</script>
 
 	</body>
 </html>
