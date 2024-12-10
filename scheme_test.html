@@ -25,6 +25,11 @@
 				-ms-user-select: none;
 				user-select: none;
 			}
+
+	        #outputImage {
+	            max-width: 100%;
+	            height: auto;
+	        }
 		</style>
 		
 		<script type="text/javascript">
@@ -283,13 +288,13 @@
           <a href="#" onclick="postMessageGetAuthToken()">GetAuthToken</a>
         </li>
         <li>
+		  <a href="#" onclick="postMessageGetMaskImage()">GetMaskImage</a>
+        </li>
+        <li>
           <a href="#" onclick="postMessageExit()">Exit</a>
         </li>
         <li>
           <a href="#" onclick="postMessageAgreeTerms()">AgreeTerms</a>
-        </li>
-        <li>
-		  <a href="#" onclick="postMessageGetMaskImage()">GetMaskImage</a>
         </li>
 	</ul>
 
