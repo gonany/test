@@ -318,15 +318,16 @@
             sendOneAppMessage("agreeTerms", str)
         }
 
-        function setBase64ToImage(base64Data) {
-            var base64Jpeg = "data:image/jpeg;base64," + base64Data;
+        function setBase64ToImage(data) {
+            var base64Jpeg = "data:image/jpeg;base64," + data;
             var imgElement = document.getElementById('outputImage');
             imgElement.src = base64Jpeg;
             imgElement.alt = 'Extracted Base64 Image';
         }
 
-        function appCallbackMaskImage_cc(jsonString) {
-            var jsonObject = JSON.parse(jsonString);
+        function appCallbackMaskImage_cc(data) {
+        	debugMessage(data)
+            var jsonObject = JSON.parse(data);
             var base64Image = jsonObject.result.image;
             setBase64ToImage(base64Image);
         }
