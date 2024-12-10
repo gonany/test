@@ -35,6 +35,13 @@
 		    box-sizing: border-box;
 		}
 
+		img {
+		  border: 2px solid #cccccc;
+		  border-radius: 8px;
+		  padding: 4px;
+		  transition: border-color 0.3s ease;
+		}
+
 		/* li 스타일 */
 		li {
 		  list-style-type: none;
@@ -358,7 +365,7 @@
     <div id="debugMessageCount"></div>
     <button onclick="copyDebugMessageToClipboard()">디버그 메시지 클립보드에 복사</button>
     <p></p>
-    <img id="outputImage" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAHElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO9TXL0Y4OHwAAAABJRU5ErkJggg==" />
+    <img id="outputImage"/>
 
     <p></p>
     <p></p>
