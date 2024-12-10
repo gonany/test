@@ -212,15 +212,13 @@
 			}
 
 			function resultMaskImageCallback_cc(data) {
-				debugMessage(data)
-
-        		var jsonObject = JSON.parse(jsonString);
+				var jsonObject = JSON.parse(jsonString);
         		var base64Image = jsonObject.result.image;
         		base64ToImage("data:image/jpeg;base64,"+base64Image)
 			}
 
 			function base64ToImage(base64Image) {
-		        // HTML에 표시
+				debugMessage(base64Image)
 		        var outputDiv = document.getElementById('outputImage');
 		        img.src = base64Image;
 		        img.alt = 'Extracted Base64 Image';
