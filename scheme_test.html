@@ -214,16 +214,16 @@
 			function base64ToImage(base64Image) {
 				debugMessage(base64Image)
 		        var outputDiv = document.getElementById('outputImage');
-		        img.src = base64Image;
+		        img.src = "data:image/jpeg;base64," + base64Image;
 		        img.alt = 'Extracted Base64 Image';
 			}
 
 			function appCallbackMaskImage_cc(data) {
 				debugMessage("appCallbackMaskImage_cc")
 				var jsonObject = JSON.parse(jsonString);
-				debugMessage("appCallbackMaskImage_cc" + jsonObject.result.id)
+				debugMessage("appCallbackMaskImage_cc result.id = " + jsonObject.result.id)
         		var base64Image = jsonObject.result.image;
-        		base64ToImage("data:image/jpeg;base64," + base64Image)
+        		base64ToImage(base64Image)
 			}
 
 			function appCallback_cc(data) {
@@ -253,7 +253,8 @@
 	<textarea id="debugMessage" rows="20" cols="100">디버그 메시지 출력</textarea>
 	<div id="debugMessageCount"></div>
 	<button onclick="copyDebugMessageToClipboard()">디버그 메시지 클립보드에 복사</button>
-
+	<p></p>
+	<img id="outputImage" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAHElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO9TXL0Y4OHwAAAABJRU5ErkJggg=="/>
     <p></p>
     <h1><a href="#" onclick="showUserAgent()">User Agent 확인</a></h1>
 	<p></p>
@@ -281,7 +282,6 @@
 	<h2><a href="sms://01012341234">SMS</a></h2>, 
 	<h2><a href="mailto:example@naver.com">MAIL</a></h2>, 
 	<p></p>
-	<img id="outputImage" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAHElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO9TXL0Y4OHwAAAABJRU5ErkJggg=="/>
 
 	<p><h1>1<h1></p><br>
 	<p><h1>2<h1></p><br>
