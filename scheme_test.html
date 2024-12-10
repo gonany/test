@@ -15,7 +15,7 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8/dist/sweetalert2.min.js"></script>
-    
+
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@8/dist/sweetalert2.min.css" id="theme-styles">
     <style type="text/css">
         * {
@@ -27,111 +27,111 @@
             user-select: none;
         }
 
-		body {
-		    font-family: 'Arial', sans-serif;
-		    background-color: #ffffff;
-		    margin: 0;
-		    padding: 5px;
-		    box-sizing: border-box;
-		}
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #ffffff;
+            margin: 0;
+            padding: 5px;
+            box-sizing: border-box;
+        }
 
-		img {
-		  border: 2px solid #cccccc;
-		  border-radius: 8px;
-		  padding: 4px;
-		  transition: border-color 0.3s ease;
-		}
+        img {
+            border: 2px solid #cccccc;
+            border-radius: 8px;
+            padding: 4px;
+            transition: border-color 0.3s ease;
+        }
 
-		/* li 스타일 */
-		li {
-		  list-style-type: none;
-		  margin-bottom: 10px;
-		}
+        /* li 스타일 */
+        li {
+            list-style-type: none;
+            margin-bottom: 10px;
+        }
 
-		li a {
-		  text-decoration: none;
-		  color: #007bff;
-		  font-weight: 600;
-		}
+        li a {
+            text-decoration: none;
+            color: #007bff;
+            font-weight: 600;
+        }
 
-		li a:hover {
-		  color: #0056b3;
-		  text-decoration: underline;
-		}
+        li a:hover {
+            color: #0056b3;
+            text-decoration: underline;
+        }
 
-		/* 버튼 스타일 */
-		button {
-		  background-color: #007bff;
-		  color: white;
-		  font-size: 16px;
-		  padding: 10px 20px;
-		  border: none;
-		  border-radius: 5px;
-		  cursor: pointer;
-		  transition: background-color 0.3s ease, transform 0.2s ease;
-		}
+        /* 버튼 스타일 */
+        button {
+            background-color: #007bff;
+            color: white;
+            font-size: 16px;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
 
-		button:hover {
-		  background-color: #0056b3;
-		  transform: translateY(-2px);
-		}
+        button:hover {
+            background-color: #0056b3;
+            transform: translateY(-2px);
+        }
 
-		button:active {
-		  background-color: #004085;
-		  transform: translateY(0);
-		}
+        button:active {
+            background-color: #004085;
+            transform: translateY(0);
+        }
 
-		button:disabled {
-		  background-color: #c6c6c6;
-		  cursor: not-allowed;
-		}
+        button:disabled {
+            background-color: #c6c6c6;
+            cursor: not-allowed;
+        }
 
-		/* input 스타일 */
-		input[type="text"],
-		input[type="password"],
-		input[type="email"],
-		input[type="number"] {
-		  width: 100%;
-		  padding: 12px 15px;
-		  margin: 8px 0;
-		  border: 2px solid #ddd;
-		  border-radius: 5px;
-		  font-size: 16px;
-		  transition: border-color 0.3s ease;
-		}
+        /* input 스타일 */
+        input[type="text"],
+        input[type="password"],
+        input[type="email"],
+        input[type="number"] {
+            width: 100%;
+            padding: 12px 15px;
+            margin: 8px 0;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            transition: border-color 0.3s ease;
+        }
 
-		input[type="text"]:focus,
-		input[type="password"]:focus,
-		input[type="email"]:focus,
-		input[type="number"]:focus {
-		  border-color: #007bff;
-		  outline: none;
-		}
+        input[type="text"]:focus,
+        input[type="password"]:focus,
+        input[type="email"]:focus,
+        input[type="number"]:focus {
+            border-color: #007bff;
+            outline: none;
+        }
 
-		input::placeholder {
-		  color: #aaa;
-		}
+        input::placeholder {
+            color: #aaa;
+        }
 
-		/* textarea 스타일 */
-		textarea {
-		  width: 100%;
-		  padding: 12px 15px;
-		  margin: 8px 0;
-		  border: 2px solid #ddd;
-		  border-radius: 5px;
-		  font-size: 16px;
-		  resize: vertical;
-		  transition: border-color 0.3s ease;
-		}
+        /* textarea 스타일 */
+        textarea {
+            width: 100%;
+            padding: 12px 15px;
+            margin: 8px 0;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            resize: vertical;
+            transition: border-color 0.3s ease;
+        }
 
-		textarea:focus {
-		  border-color: #007bff;
-		  outline: none;
-		}
+        textarea:focus {
+            border-color: #007bff;
+            outline: none;
+        }
 
-		textarea::placeholder {
-		  color: #aaa;
-		}
+        textarea::placeholder {
+            color: #aaa;
+        }
 
         #outputImage {
             max-width: 100%;
@@ -333,7 +333,7 @@
         }
 
         function appCallbackMaskImage_cc(data) {
-        	debugMessage(data)
+            debugMessage(data)
             var jsonObject = JSON.parse(data);
             var base64Image = jsonObject.result.image;
             setBase64ToImage(base64Image);
@@ -365,7 +365,7 @@
     <div id="debugMessageCount"></div>
     <button onclick="copyDebugMessageToClipboard()">디버그 메시지 클립보드에 복사</button>
     <p></p>
-    <img id="outputImage"/>
+    <img id="outputImage" />
 
     <p></p>
     <p></p>
