@@ -221,9 +221,9 @@
 			function appCallbackMaskImage_cc(data) {
 				debugMessage("appCallbackMaskImage_cc")
 				var jsonObject = JSON.parse(jsonString);
-				alert(jsonObject)
+				debugMessage("appCallbackMaskImage_cc" + jsonObject.result.id)
         		var base64Image = jsonObject.result.image;
-        		base64ToImage("data:image/jpeg;base64,"+base64Image)
+        		base64ToImage("data:image/jpeg;base64," + base64Image)
 			}
 
 			function appCallback_cc(data) {
