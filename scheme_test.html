@@ -211,17 +211,19 @@
 				sendOneAppMessage("agreeTerms", str)
 			}
 
-			function resultMaskImageCallback_cc(data) {
-				var jsonObject = JSON.parse(jsonString);
-        		var base64Image = jsonObject.result.image;
-        		base64ToImage("data:image/jpeg;base64,"+base64Image)
-			}
-
 			function base64ToImage(base64Image) {
 				debugMessage(base64Image)
 		        var outputDiv = document.getElementById('outputImage');
 		        img.src = base64Image;
 		        img.alt = 'Extracted Base64 Image';
+			}
+
+			function resultMaskImageCallback_cc(data) {
+				debugMessage("resultMaskImageCallback_cc")
+				var jsonObject = JSON.parse(jsonString);
+				alert(jsonObject)
+        		var base64Image = jsonObject.result.image;
+        		base64ToImage("data:image/jpeg;base64,"+base64Image)
 			}
 
 			function appCallback_cc(data) {
