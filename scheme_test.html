@@ -195,7 +195,7 @@
 			function postMessageGetMaskImage() {
 			    const str = `{
 			  "uid": "123123123",
-			  "resultFuncName": "resultMaskImageCallback_cc",
+			  "resultFuncName": "appCallbackMaskImage_cc",
 			  "limitSize": 5
 			}`;
 				sendOneAppMessage("getMaskImage", str)
@@ -218,8 +218,8 @@
 		        img.alt = 'Extracted Base64 Image';
 			}
 
-			function resultMaskImageCallback_cc(data) {
-				debugMessage("resultMaskImageCallback_cc")
+			function appCallbackMaskImage_cc(data) {
+				debugMessage("appCallbackMaskImage_cc")
 				var jsonObject = JSON.parse(jsonString);
 				alert(jsonObject)
         		var base64Image = jsonObject.result.image;
@@ -281,9 +281,7 @@
 	<h2><a href="sms://01012341234">SMS</a></h2>, 
 	<h2><a href="mailto:example@naver.com">MAIL</a></h2>, 
 	<p></p>
-	<img id="outputImage" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUA
-    AAAFCAYAAACNbyblAAAAHElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO
-        9TXL0Y4OHwAAAABJRU5ErkJggg=="/>
+	<img id="outputImage" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAHElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO9TXL0Y4OHwAAAABJRU5ErkJggg=="/>
 
 	<p><h1>1<h1></p><br>
 	<p><h1>2<h1></p><br>
