@@ -1,154 +1,211 @@
 <!DOCTYPE html>
 <html>
-	<head>	
-		<title>welcome</title>
-		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <!--<meta name="viewport" content="user-scalable=no" />-->
-	
-		<meta property="og:title" content="나 이혼 시켜줘! : 코미코(comico) - 한/일 레전드 만화 총출동!">
-		<meta property="og:description" content="하성현 / 대원씨아이 작가의 단행본만화 나 이혼 시켜줘!. 지금 만나보세요!">
-		<meta property="og:image" content="https://img.insight.co.kr/static/2019/04/24/700/16l9qxr1l83y0jy060ow.jpg">
-		<meta property="og:type" content="article"> 
-		<meta property="og:site_name" content="comico">
-		
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
-		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@8/dist/sweetalert2.min.js"></script>
-		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@8/dist/sweetalert2.min.css" id="theme-styles">
-		<style type="text/css">
-			* {
-			    -webkit-touch-callout: none;
-				-webkit-user-select: none;
-				-khtml-user-select: none;
-				-moz-user-select: none;
-				-ms-user-select: none;
-				user-select: none;
-			}
+<head>
+    <title>welcome</title>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--<meta name="viewport" content="user-scalable=no" />-->
 
-	        #outputImage {
-	            max-width: 100%;
-	            height: auto;
-	        }
-		</style>
-		
-		<script type="text/javascript">
-			function checkMobile() {
-			    var agent = navigator.userAgent.toLowerCase(); //userAgent 값 얻기
-			    if (agent.indexOf("android") > -1) {
-			        return "android";
-			    } else if (agent.indexOf("iphone") > -1 || agent.indexOf("ipad") > -1 || agent.indexOf("ipod") > -1) {
-			        return "ios";
-			    } else {
-			        return "other";
-			    }
-			}
+    <meta property="og:title" content="나 이혼 시켜줘! : 코미코(comico) - 한/일 레전드 만화 총출동!">
+    <meta property="og:description" content="하성현 / 대원씨아이 작가의 단행본만화 나 이혼 시켜줘!. 지금 만나보세요!">
+    <meta property="og:image" content="https://img.insight.co.kr/static/2019/04/24/700/16l9qxr1l83y0jy060ow.jpg">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="comico">
 
-			function checkBrowser() {
-			    var agent = navigator.userAgent.toLowerCase(); //userAgent 값 얻기
-			    if (agent.indexOf("edge") > -1) {
-			        return "edge";
-			    } else if (agent.indexOf("chrome") > -1) {
-			        return "chrome";
-			    } else if (agent.indexOf("firefox") > -1) {
-			        return "firefox";
-			    } else if (agent.indexOf("safari") > -1) {
-			        return "safari";
-			    } else {
-			        return "other";
-			    }
-			}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8/dist/sweetalert2.min.js"></script>
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@8/dist/sweetalert2.min.css" id="theme-styles">
+    <style type="text/css">
+        * {
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -khtml-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
 
-			function isSafari() {
-			    return checkBrowser() == "safari";
-			}
+		body {
+		    font-family: 'Arial', sans-serif;
+		    background-color: #f4f4f9;
+		    margin: 0;
+		    padding: 0;
+		    box-sizing: border-box;
+		}
 
-			function isIOS() {
-			    return checkMobile() == "ios";
-			}
+		a {
+		    text-decoration: none; /* 기본 밑줄 제거 */
+		    color: #333; /* 기본 텍스트 색상 */
+		    transition: color 0.3s ease, transform 0.2s ease; /* 부드러운 전환 효과 */
+		}
 
-			function isAOS() {
-			    return checkMobile() == "android";
-			}
+		/* a 태그 hover 상태 스타일 */
+		a:hover {
+		    color: #007bff; /* 마우스 올렸을 때 파란색으로 변경 */
+		    transform: scale(1.05); /* 마우스를 올렸을 때 살짝 커지는 효과 */
+		}
 
-			function getMetaContentByName(name, content) {
-			    var content = content == null ? "content" : content;
 
-			    var metas = document.getElementsByTagName("meta");
+		ul {
+		    list-style: none; /* 기본 점을 제거 */
+		    padding: 0;
+		    margin: 0;
+		}
 
-			    for (var i = 0; i < metas.length; i++) {
-			        if (metas[i].getAttribute("property") == name) {
-			            return metas[i].getAttribute(content);
-			        }
-			    }
+		li {
+		    margin: 10px 0; /* 각 항목 간의 간격 */
+		    padding: 10px;
+		    border-radius: 8px; /* 둥근 모서리 */
+		    background-color: #fff; /* 배경색 */
+		    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 미세한 그림자 */
+		    transition: background-color 0.3s ease; /* 배경색 전환 효과 */
+		}
 
-			    return "";
-			}
+		li:hover {
+		    background-color: #f0f8ff; /* 마우스 올렸을 때 배경색 변경 */
+		    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 그림자 효과 강화 */
+		}
 
-			function callScheme(url) {
-			    let iframe = document.createElement("iframe");
-			    iframe.setAttribute("src", url);
-			    iframe.setAttribute("height", "1px");
-			    iframe.setAttribute("width", "1px");
-			    document.documentElement.appendChild(iframe);
-			    iframe.parentNode.removeChild(iframe);
-			    iframe = null;
-			}
+		ul.styled-list {
+		    padding-left: 20px; /* 왼쪽 여백 추가 */
+		}
 
-			function isWebviewClose() {
-			    alert(typeof onWebviewClose == "function");
-			}
+		ul.styled-list li::before {
+		    content: "• "; /* 항목 앞에 점을 추가 */
+		    color: #007bff; /* 점 색상 */
+		    font-size: 18px; /* 점 크기 */
+		}
 
-			function onWebviewClose() {
-			    alert("나가고 싶으면 댕댕이를 눌러줘~");
-			}
+		ul.styled-list li a {
+		    font-weight: bold; /* 링크 텍스트를 굵게 */
+		    color: #333; /* 기본 텍스트 색상 */
+		}
 
-			function scoringCameraResult(base64ImageData) {
-			    alert("scoringCameraResult");
-			}
+        #outputImage {
+            max-width: 100%;
+            height: auto;
+        }
+    </style>
 
-			function showUserAgent() {
-			    alert(navigator.userAgent);
-			}
+    <script type="text/javascript">
+        function checkMobile() {
+            var agent = navigator.userAgent.toLowerCase(); //userAgent 값 얻기
+            if (agent.indexOf("android") > -1) {
+                return "android";
+            } else if (agent.indexOf("iphone") > -1 || agent.indexOf("ipad") > -1 || agent.indexOf("ipod") > -1) {
+                return "ios";
+            } else {
+                return "other";
+            }
+        }
 
-			function showAlert(message) {
-			    if (message == null || message == "") {
-			        return;
-			    }
-			    alert(message);
-			}
+        function checkBrowser() {
+            var agent = navigator.userAgent.toLowerCase(); //userAgent 값 얻기
+            if (agent.indexOf("edge") > -1) {
+                return "edge";
+            } else if (agent.indexOf("chrome") > -1) {
+                return "chrome";
+            } else if (agent.indexOf("firefox") > -1) {
+                return "firefox";
+            } else if (agent.indexOf("safari") > -1) {
+                return "safari";
+            } else {
+                return "other";
+            }
+        }
 
-			function webviewForeground(isFirstCall) {
-			    console.log("webviewForeground isFirstCall:" + isFirstCall);
-			}
+        function isSafari() {
+            return checkBrowser() == "safari";
+        }
 
-			function webviewBackground() {
-			    console.log("webviewBackground");
-			}
+        function isIOS() {
+            return checkMobile() == "ios";
+        }
 
-			function newWindow() {
-			    var url = "https://www.nate.com/";
-			    window.open(url, "", "width=400,height=400,left=600");
-			}
+        function isAOS() {
+            return checkMobile() == "android";
+        }
 
-			function sendCommonMessage(funcName, value) {
-				let newFuncName = "HMGCommonInterface_" + funcName
-				debugMessage(newFuncName + " / " + value)
-			    window.webkit.messageHandlers[newFuncName].postMessage(value);
-			}
+        function getMetaContentByName(name, content) {
+            var content = content == null ? "content" : content;
 
-			function sendOneAppMessage(funcName, value) {
-				let newFuncName = "HMGOneAppInterface_" + funcName
-				debugMessage(newFuncName + " / " + value)
-			    window.webkit.messageHandlers[newFuncName].postMessage(value);
-			}
+            var metas = document.getElementsByTagName("meta");
 
-			function postClose(message) {
-			    const str = `{}`;
-			  	sendCommonMessage("close", str)
-			}
+            for (var i = 0; i < metas.length; i++) {
+                if (metas[i].getAttribute("property") == name) {
+                    return metas[i].getAttribute(content);
+                }
+            }
 
-			function copyDebugMessageToClipboard() {
+            return "";
+        }
+
+        function callScheme(url) {
+            let iframe = document.createElement("iframe");
+            iframe.setAttribute("src", url);
+            iframe.setAttribute("height", "1px");
+            iframe.setAttribute("width", "1px");
+            document.documentElement.appendChild(iframe);
+            iframe.parentNode.removeChild(iframe);
+            iframe = null;
+        }
+
+        function isWebviewClose() {
+            alert(typeof onWebviewClose == "function");
+        }
+
+        function onWebviewClose() {
+            alert("나가고 싶으면 댕댕이를 눌러줘~");
+        }
+
+        function scoringCameraResult(base64ImageData) {
+            alert("scoringCameraResult");
+        }
+
+        function showUserAgent() {
+            alert(navigator.userAgent);
+        }
+
+        function showAlert(message) {
+            if (message == null || message == "") {
+                return;
+            }
+            alert(message);
+        }
+
+        function webviewForeground(isFirstCall) {
+            console.log("webviewForeground isFirstCall:" + isFirstCall);
+        }
+
+        function webviewBackground() {
+            console.log("webviewBackground");
+        }
+
+        function newWindow() {
+            var url = "https://www.nate.com/";
+            window.open(url, "", "width=400,height=400,left=600");
+        }
+
+        function sendCommonMessage(funcName, value) {
+            let newFuncName = "HMGCommonInterface_" + funcName
+            debugMessage(newFuncName + " / " + value)
+            window.webkit.messageHandlers[newFuncName].postMessage(value);
+        }
+
+        function sendOneAppMessage(funcName, value) {
+            let newFuncName = "HMGOneAppInterface_" + funcName
+            debugMessage(newFuncName + " / " + value)
+            window.webkit.messageHandlers[newFuncName].postMessage(value);
+        }
+
+        function postClose(message) {
+            const str = `{}`;
+            sendCommonMessage("close", str)
+        }
+
+        function copyDebugMessageToClipboard() {
             const textarea = document.getElementById('debugMessage');
 
             textarea.select();
@@ -162,179 +219,197 @@
             }
         }
 
-			function postMessageShowTost(message) {
-			    const str = `{
+        function postMessageShowTost(message) {
+            const str = `{
 			  "message": "JS 토스트 메시지",
 			  "durationTime": "long"
 			  }`;
-			  sendCommonMessage("showToast", str)
-			}
+            sendCommonMessage("showToast", str)
+        }
 
-			function postMessageOpenWebView(url) {
-			    const str = `{
+        function postMessageOpenWebView(url) {
+            const str = `{
 			  "url": "https://naver.com",
 			  "isNavigationBar": false,
 			  "isToolBar": true,
 			  "appearType": "push"
 			}`;
-				sendCommonMessage("openWebView", str)
-			}
+            sendCommonMessage("openWebView", str)
+        }
 
-			function postMessageSetBrightness() {
-			    const str = `{
+        function postMessageSetBrightness() {
+            const str = `{
 			  "uid": "123123123",
 			  "contents": {"brightness": 1.0},
 			  "resultFuncName": "appCallback_cc"
 			}`;
-				sendCommonMessage("screenBrightness", str)
-			}
+            sendCommonMessage("screenBrightness", str)
+        }
 
-			function postMessageGetAuthToken() {
-			    const str = `{
+        function postMessageGetAuthToken() {
+            const str = `{
 			  "uid": "123123123",
 			  "resultFuncName": "appCallback_cc"
 			}`;
-				sendOneAppMessage("getAuthToken", str)
-			}
+            sendOneAppMessage("getAuthToken", str)
+        }
 
 
-			function postMessageGetMaskImage() {
-			    const str = `{
+        function postMessageGetMaskImage() {
+            const str = `{
 			  "uid": "123123123",
 			  "resultFuncName": "appCallbackMaskImage_cc",
 			  "limitSize": 5
 			}`;
-				sendOneAppMessage("getMaskImage", str)
-			}
+            sendOneAppMessage("getMaskImage", str)
+        }
 
-			function postMessageExit() {
-			    const str = `{"nextScheme":"app://availablevehicles"}`;
-				sendOneAppMessage("exit", str)
-			}
+        function postMessageExit() {
+            const str = `{"nextScheme":"app://availablevehicles"}`;
+            sendOneAppMessage("exit", str)
+        }
 
-			function postMessageAgreeTerms() {
-			    const str = `{"termGroupType":"KR_CCI_TOTAL"}`;
-				sendOneAppMessage("agreeTerms", str)
-			}
+        function postMessageAgreeTerms() {
+            const str = `{"termGroupType":"KR_CCI_TOTAL"}`;
+            sendOneAppMessage("agreeTerms", str)
+        }
 
-			function setBase64ToImage(base64Data) {
-				var base64Jpeg = "data:image/jpeg;base64," + base64Data;
-		        var imgElement = document.getElementById('outputImage');
-		        imgElement.src = base64Jpeg;
-		        imgElement.alt = 'Extracted Base64 Image';
-			}
+        function setBase64ToImage(base64Data) {
+            var base64Jpeg = "data:image/jpeg;base64," + base64Data;
+            var imgElement = document.getElementById('outputImage');
+            imgElement.src = base64Jpeg;
+            imgElement.alt = 'Extracted Base64 Image';
+        }
 
-			function appCallbackMaskImage_cc(jsonString) {
-				var jsonObject = JSON.parse(jsonString);
-        		var base64Image = jsonObject.result.image;
-        		setBase64ToImage(base64Image);
-			}
+        function appCallbackMaskImage_cc(jsonString) {
+            var jsonObject = JSON.parse(jsonString);
+            var base64Image = jsonObject.result.image;
+            setBase64ToImage(base64Image);
+        }
 
-			function appCallback_cc(data) {
-				debugMessage(data)
-			}
+        function appCallback_cc(data) {
+            debugMessage(data)
+        }
 
-			function onload() {
-				debugMessage(navigator.userAgent)
-			}
+        function onload() {
+            debugMessage(navigator.userAgent)
+        }
 
-			function debugMessage(msg) {
-				var element = document.getElementById("debugMessageCount");
-				element.innerText = 'message count: ' + msg.length;
+        function debugMessage(msg) {
+            var element = document.getElementById("debugMessageCount");
+            element.innerText = 'message count: ' + msg.length;
 
-				var element = document.getElementById("debugMessage");
-				element.innerText = msg;
-			}
+            var element = document.getElementById("debugMessage");
+            element.innerText = msg;
+        }
+    </script>
 
-		</script>
+</head>
 
-	</head>
-
-	<body onload="onload()">
-
-	<p></p>
-	<textarea id="debugMessage" rows="20" cols="55">디버그 메시지 출력</textarea>
-	<div id="debugMessageCount"></div>
-	<button onclick="copyDebugMessageToClipboard()">디버그 메시지 클립보드에 복사</button>
-	<p></p>
-	<img id="outputImage" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAHElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO9TXL0Y4OHwAAAABJRU5ErkJggg=="/>
+<body onload="onload()">
 
     <p></p>
-	<p></p>
-	<h1># 공통 인터페이스</h1>
-	<ul>
-		<li>
-          <a href="#" onclick="showUserAgent()">User Agent 확인</a>
-        </li>
-        <li>
-          <a href="#" onclick="postClose()">close</a>
-        </li>
-        <li>
-          <a href="#" onclick="postMessageShowTost('JS 토스트 테스트')">네이티브에 메시지 전달(ShowTost)</a>
-        </li>
-        <li>
-          <a href="#" onclick="postMessageOpenWebView('https://www.naver.com')">네이티브 팝업(ShowTost)</a>
-        </li>
-        <li>
-          <a href="#" onclick="postMessageSetBrightness()">postMessageSetBrightness</a>
-        </li>
-	</ul>
+    <textarea id="debugMessage" rows="20" cols="55">디버그 메시지 출력</textarea>
+    <div id="debugMessageCount"></div>
+    <button onclick="copyDebugMessageToClipboard()">디버그 메시지 클립보드에 복사</button>
+    <p></p>
+    <img id="outputImage" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAHElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO9TXL0Y4OHwAAAABJRU5ErkJggg==" />
 
-	<p></p>
-	<p></p>
-	<h1># 원앱 인터페이스</h1>
-	<ul>
+    <p></p>
+    <p></p>
+    <h3># 공통 인터페이스</h3>
+    <ul>
         <li>
-          <a href="#" onclick="postMessageGetAuthToken()">GetAuthToken</a>
+            <a href="#" onclick="showUserAgent()">User Agent 확인</a>
         </li>
         <li>
-		  <a href="#" onclick="postMessageGetMaskImage()">GetMaskImage</a>
+            <a href="#" onclick="postClose()">close</a>
         </li>
         <li>
-          <a href="#" onclick="postMessageExit()">Exit</a>
+            <a href="#" onclick="postMessageShowTost('JS 토스트 테스트')">네이티브에 메시지 전달(ShowTost)</a>
         </li>
         <li>
-          <a href="#" onclick="postMessageAgreeTerms()">AgreeTerms</a>
+            <a href="#" onclick="postMessageOpenWebView('https://www.naver.com')">네이티브 팝업(ShowTost)</a>
         </li>
-	</ul>
+        <li>
+            <a href="#" onclick="postMessageSetBrightness()">postMessageSetBrightness</a>
+        </li>
+    </ul>
 
-	<p></p>
-	<p></p>
+    <p></p>
+    <p></p>
+    <h3># 원앱 인터페이스</h3>
+    <ul>
+        <li>
+            <a href="#" onclick="postMessageGetAuthToken()">GetAuthToken</a>
+        </li>
+        <li>
+            <a href="#" onclick="postMessageGetMaskImage()">GetMaskImage</a>
+        </li>
+        <li>
+            <a href="#" onclick="postMessageExit()">Exit</a>
+        </li>
+        <li>
+            <a href="#" onclick="postMessageAgreeTerms()">AgreeTerms</a>
+        </li>
+    </ul>
 
-	<h1># 기타</h1>
-	<ul>
-        <li>
-          <input type="button" value="새창열기"  onclick="newWindow()"/>
-        </li>
-        <li>
-          <h2><a href="tel://01012341234">전화번호1</a></h2>
-        </li>
-        <li>
-          <h2><a href="tel://telprompt">전화번호2</a></h2>
-        </li>
-        <li>
-		  <h2><a href="sms://01012341234">SMS</a></h2>
-        </li>
-        <li>
-			<h2><a href="mailto:example@naver.com">MAIL</a></h2>
-        </li>
-	</ul>
+    <p></p>
+    <p></p>
 
-	<p><h1>1<h1></p>
-	<p><h1>3<h1></p>
-	<p><h1>4<h1></p>
-	<p><h1>5<h1></p>
-	<p><h1>6<h1></p>
-	<p><h1>7<h1></p>
-	<p><h1>8<h1></p>
-	<p><h1>9<h1></p>
-	<p><h1>10<h1></p>
-	<h1>스크롤테스트</h1>
-		
-		
-	<script>
-		document.getElementById("image").src = getMetaContentByName("og:image");
-	</script>
+    <h3># 기타</h3>
+    <ul>
+        <li>
+            <input type="button" value="새창열기" onclick="newWindow()" />
+        </li>
+        <li>
+            <a href="tel://01012341234">전화번호1</a>
+        </li>
+        <li>
+            <a href="tel://telprompt">전화번호2</a>
+        </li>
+        <li>
+            <a href="sms://01012341234">SMS</a>
+        </li>
+        <li>
+            <a href="mailto:example@naver.com">MAIL</a>
+        </li>
+    </ul>
 
-	</body>
+    <p>
+        <h1>1<h1>
+    </p>
+    <p>
+        <h1>3<h1>
+    </p>
+    <p>
+        <h1>4<h1>
+    </p>
+    <p>
+        <h1>5<h1>
+    </p>
+    <p>
+        <h1>6<h1>
+    </p>
+    <p>
+        <h1>7<h1>
+    </p>
+    <p>
+        <h1>8<h1>
+    </p>
+    <p>
+        <h1>9<h1>
+    </p>
+    <p>
+        <h1>10<h1>
+    </p>
+    <h1>스크롤테스트</h1>
+
+
+    <script>
+        document.getElementById("image").src = getMetaContentByName("og:image");
+    </script>
+
+</body>
+
 </html>
