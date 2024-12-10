@@ -212,10 +212,11 @@
 				sendOneAppMessage("agreeTerms", str)
 			}
 
-			function setBase64ToImage(base64Image) {
-				debugMessage(base64Image)
+			function setBase64ToImage(base64Data) {
+				var base64Jpeg = "data:image/jpeg;base64," + base64Data;
+				debugMessage(base64Jpeg)
 		        var outputDiv = document.getElementById('outputImage');
-		        img.src = "data:image/jpeg;base64," + base64Image;
+		        img.src = base64Jpeg;
 		        img.alt = 'Extracted Base64 Image';
 			}
 
@@ -224,7 +225,7 @@
 				var jsonObject = JSON.parse(jsonString);
 				debugMessage("appCallbackMaskImage_cc result.id = " + jsonObject.result.id)
         		var base64Image = jsonObject.result.image;
-        		setBase64ToImage(base64Image)
+        		setBase64ToImage(base64Image);
 			}
 
 			function appCallback_cc(data) {
@@ -251,7 +252,7 @@
 	<body onload="onload()">
 	<p></p>
     <p></p>
-	<textarea id="debugMessage" rows="20" cols="100">디버그 메시지 출력</textarea>
+	<textarea id="debugMessage" rows="20" cols="50">디버그 메시지 출력</textarea>
 	<div id="debugMessageCount"></div>
 	<button onclick="copyDebugMessageToClipboard()">디버그 메시지 클립보드에 복사</button>
 	<p></p>
