@@ -325,10 +325,9 @@
             sendOneAppMessage("agreeTerms", str)
         }
 
-        function setBase64ToImage(data) {
-            var base64Jpeg = "data:image/jpeg;base64," + data;
+        function setBase64ToImage(base64ImageData) {
             var imgElement = document.getElementById('outputImage');
-            imgElement.src = base64Jpeg;
+            imgElement.src = base64ImageData;
             imgElement.alt = 'Extracted Base64 Image';
         }
 
