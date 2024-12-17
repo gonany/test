@@ -363,9 +363,7 @@
     <textarea id="debugMessage" rows="20" cols="50">디버그 메시지 출력</textarea>
     <div id="debugMessageCount"></div>
     <button onclick="copyDebugMessageToClipboard()">디버그 메시지 클립보드에 복사</button>
-    <p></p>
-    <img id="outputImage" />
-
+    
     <p></p>
     <p></p>
     <h3>* 공통 인터페이스</h3>
@@ -426,6 +424,10 @@
             <a href="mailto:example@naver.com">MAIL</a>
         </li>
     </ul>
+
+    <p></p>
+    <p></p>
+    <img id="outputImage" />
 
     <script>
         document.getElementById("image").src = getMetaContentByName("og:image");
