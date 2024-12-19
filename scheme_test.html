@@ -332,11 +332,12 @@
         }
 
         function appCallbackVehicleRegistrationDocumentFile_cc(data) {
-            debugMessage("appCallbackVehicleRegistrationDocumentFile_cc data.length=" + data.length)
             var jsonObject = JSON.parse(data);
             var mimeType = jsonObject.result.mimeType;
             var base64Image = "data:" + mimeType + ";base64," + jsonObject.result.base64Data;
             setBase64ToImage(base64Image);
+
+            debugMessage("appCallbackVehicleRegistrationDocumentFile_cc data.length=" + data.length + ", fileName:" + jsonObject.result.name + ", mimeType:" + jsonObject.result.mimeType)
         }
 
         function appCallback_cc(data) {
