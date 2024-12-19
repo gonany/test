@@ -7,8 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!--<meta name="viewport" content="user-scalable=no" />-->
 
-    <meta property="og:title" content="나 이혼 시켜줘! : 코미코(comico) - 한/일 레전드 만화 총출동!">
-    <meta property="og:description" content="하성현 / 대원씨아이 작가의 단행본만화 나 이혼 시켜줘!. 지금 만나보세요!">
+    <meta property="og:title" content="타이틀">
+    <meta property="og:description" content="디스크립션 데이터">
     <meta property="og:image" content="https://img.insight.co.kr/static/2019/04/24/700/16l9qxr1l83y0jy060ow.jpg">
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="comico">
@@ -306,13 +306,13 @@
         }
 
 
-        function postMessageGetMaskImage() {
+        function postMessageGetVehicleRegistrationDocumentFile() {
             const str = `{
 			  "uid": "123123123",
-			  "resultFuncName": "appCallbackMaskImage_cc",
+			  "resultFuncName": "appCallbackVehicleRegistrationDocumentFile_cc",
 			  "limitSize": 5
 			}`;
-            sendOneAppMessage("getMaskImage", str)
+            sendOneAppMessage("getVehicleRegistrationDocumentFile", str)
         }
 
         function postMessageExit() {
@@ -331,10 +331,11 @@
             imgElement.alt = 'Extracted Base64 Image';
         }
 
-        function appCallbackMaskImage_cc(data) {
-            debugMessage("appCallbackMaskImage_cc data.length=" + data.length)
+        function appCallbackVehicleRegistrationDocumentFile_cc(data) {
+            debugMessage("appCallbackVehicleRegistrationDocumentFile_cc data.length=" + data.length)
             var jsonObject = JSON.parse(data);
-            var base64Image = jsonObject.result.image;
+            var mimeType = jsonObject.result.mimeType;
+            var base64Image = "data:" + mimeType + ";base64," + jsonObject.result.base64Data;
             setBase64ToImage(base64Image);
         }
 
@@ -394,7 +395,7 @@
             <a onclick="postMessageGetAuthToken()">GetAuthToken</a>
         </li>
         <li>
-            <a onclick="postMessageGetMaskImage()">GetMaskImage</a>
+            <a onclick="postMessageGetVehicleRegistrationDocumentFile()">GetVehicleRegistrationDocumentFile</a>
         </li>
         <li>
             <a onclick="postMessageExit()">Exit</a>
