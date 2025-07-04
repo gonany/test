@@ -257,23 +257,33 @@
         }
 
         function windowOpenURL() {
-            const targetURL = document.getElementById('targetOpenURL');
+            const targetInput = document.getElementById('targetOpenURL');
+            const rawValue = targetInput.value.trim();
+
+            if (rawValue === "") {
+                alert('URL을 입력해주세요.');
+                return;
+            }
+
             let currentURL;
             try {
-                currentURL = new URL(targetURL.value);
+                const encodedURL = encodeURIComponent(rawValue);
+                currentURL = new URL(`app://webView?url=${encodedURL}`);  // 백틱 사용!
             } catch (error) {
                 alert('유효하지 않은 URL 형식입니다. 올바른 URL을 입력해주세요.');
                 console.error('URL 파싱 오류:', error);
                 return;
             }
-            
+
             const checkbox = document.getElementById('openURLCheckbox');
             if (checkbox.checked) {
                 currentURL.searchParams.set('isModalEntry', 'true');
+            } else {
+                currentURL.searchParams.delete('isModalEntry');
             }
-            debugMessage(currentURL.toString())
 
-            window.open(currentURL.toString())
+            debugMessage(currentURL.toString());
+            window.open(currentURL.toString());
         }
 
         function exit() {
@@ -284,7 +294,7 @@
             } else {
                 str = '{}'
             }
-            sendCommonMessage("exit", str)
+            sendOneAppMessage("exit", str)
         }
 
 
@@ -430,6 +440,11 @@
         <li>
             <a onclick="postMessageSetBrightness()">postMessageSetBrightness</a>
         </li>
+        
+    </ul>
+
+    <h3>* URL 관련 인터페이스</h3>
+    <ul>
         <li>
             <input type="text" id="targetOpenURL" size="20" />
             <button onclick="windowOpenURL()">window.open</button>
