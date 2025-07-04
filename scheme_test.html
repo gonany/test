@@ -373,6 +373,10 @@
 
         function onload() {
             debugMessage(navigator.userAgent)
+            document.getElementById("image").src = getMetaContentByName("og:image");
+        
+            const targetOpenURL = document.getElementById('targetOpenURL');
+            targetOpenURL.value = window.location.href;
         }
 
         function debugMessage(msg) {
@@ -422,7 +426,7 @@
             <a onclick="postMessageSetBrightness()">postMessageSetBrightness</a>
         </li>
         <li>
-            <input type="text" id="targetOpenURL" size="20" /> <a onclick="windowOpenURL()">window.open</a> <input type="checkbox" id="openURLCheckbox"/><label for="checkbox">modal</label>
+            <input type="text" id="targetOpenURL" size="20" /> <a onclick="windowOpenURL()">window.open</a> <input type="checkbox" id="openURLCheckbox"/><label for="openURLCheckbox">modal</label>
         </li>
         <li>
             <input type="text" id="exitNextOpenURL" size="20" /> <a onclick="exit()">exit</a>
@@ -471,13 +475,6 @@
             <a onclick="testOpen()">testOpen</a>
         </li>
     </ul>
-
-    <script>
-        document.getElementById("image").src = getMetaContentByName("og:image");
-        
-        const targetOpenURL = document.getElementById('targetOpenURL');
-        targetOpenURL.value = window.location.href;
-    </script>
 
 </body>
 
