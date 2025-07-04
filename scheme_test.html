@@ -304,7 +304,7 @@
             const targetURL = document.getElementById('exitNextOpenURL');
             let str;
             if (targetURL.value !== "") {
-                str = `{ "nextScheme": ${targetURL.value} }`;
+                str = `{ "nextScheme": "${targetURL.value}" }`;
             } else {
                 str = '{}'
             }
@@ -461,13 +461,13 @@
     <ul>
         <li>
             <input type="text" id="targetOpenURL" size="20" />
-            <button onclick="webViewScheme()">웹뷰스킴실행</button>
+            <button onclick="webViewScheme()">웹뷰스킴</button>
             <input type="checkbox" id="webViewModalCheckbox"/>
-            <label for="webViewModalCheckbox">modal</label>
+            <label for="webViewModalCheckbox">Modal</label>
             <input type="checkbox" id="webViewNaviCheckbox"/>
-            <label for="webViewNaviCheckbox">showNavigationBar</label>
+            <label for="webViewNaviCheckbox">NavigationBar</label>
             <input type="checkbox" id="webViewToolbarCheckbox"/>
-            <label for="webViewToolbarCheckbox">showToolbar</label>
+            <label for="webViewToolbarCheckbox">Toolbar</label>
         </li>
         <li>
             <input type="text" id="exitNextOpenURL" size="20" />
