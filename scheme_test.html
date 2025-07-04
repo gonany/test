@@ -141,6 +141,11 @@
     </style>
 
     <script type="text/javascript">
+        document.addEventListener('DOMContentLoaded', function() {
+            const targetOpenURL = document.getElementById('targetOpenURL');
+            targetOpenURL.value = window.location.href;
+        }
+
         function checkMobile() {
             var agent = navigator.userAgent.toLowerCase(); //userAgent 값 얻기
             if (agent.indexOf("android") > -1) {
@@ -254,6 +259,25 @@
         function postClose(message) {
             const str = `{}`;
             sendCommonMessage("close", str)
+        }
+
+        function openURL() {
+            const targetOpenURL = document.getElementById('targetOpenURL');
+            let currentURL;
+            try {
+                currentURL = new URL(targetOpenURL.value);
+            } catch (error) {
+                alert('유효하지 않은 URL 형식입니다. 올바른 URL을 입력해주세요.');
+                console.error('URL 파싱 오류:', error);
+                return;
+            }
+            
+            const checkbox = document.getElementById('openURLCheckbox');
+            if (checkbox.checked) {
+                currentURL.searchParams.set('isModalEntry', 'true');
+            }
+
+            window.open(currentURL.toString())
         }
 
         function copyDebugMessageToClipboard() {
@@ -392,6 +416,8 @@
         </li>
         <li>
             <a onclick="postMessageSetBrightness()">postMessageSetBrightness</a>
+        </li>
+        <li><input type="text" id="targetOpenURL" size="60"> <input type="checkbox" id="openURLCheckbox"><label for="checkbox">modal</label> <a onclick="openURL()">window.open(self)</a>
         </li>
     </ul>
 
