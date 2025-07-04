@@ -141,11 +141,6 @@
     </style>
 
     <script type="text/javascript">
-        document.addEventListener('DOMContentLoaded', function() {
-            const targetOpenURL = document.getElementById('targetOpenURL');
-            targetOpenURL.value = window.location.href;
-        }
-
         function checkMobile() {
             var agent = navigator.userAgent.toLowerCase(); //userAgent 값 얻기
             if (agent.indexOf("android") > -1) {
@@ -262,10 +257,10 @@
         }
 
         function openURL() {
-            const targetOpenURL = document.getElementById('targetOpenURL');
+            const targetURL = document.getElementById('targetOpenURL');
             let currentURL;
             try {
-                currentURL = new URL(targetOpenURL.value);
+                currentURL = new URL(targetURL.value);
             } catch (error) {
                 alert('유효하지 않은 URL 형식입니다. 올바른 URL을 입력해주세요.');
                 console.error('URL 파싱 오류:', error);
@@ -276,9 +271,17 @@
             if (checkbox.checked) {
                 currentURL.searchParams.set('isModalEntry', 'true');
             }
+            debugMessage(currentURL.toString())
 
             window.open(currentURL.toString())
         }
+
+        function exit() {
+            const targetURLString = document.getElementById('exitNextOpenURL');
+            const str = `{ "nextScheme": ${targetURLString} }`;
+            sendCommonMessage("exit", str)
+        }
+
 
         function copyDebugMessageToClipboard() {
             const textarea = document.getElementById('debugMessage');
@@ -386,6 +389,12 @@
                 console.log("pop closed : " + pop.closed);
             }, 1000)
         }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const targetOpenURL = document.getElementById('targetOpenURL');
+            targetOpenURL.value = window.location.href;
+        }
+
     </script>
 
 </head>
@@ -417,7 +426,11 @@
         <li>
             <a onclick="postMessageSetBrightness()">postMessageSetBrightness</a>
         </li>
-        <li><input type="text" id="targetOpenURL" size="60"> <input type="checkbox" id="openURLCheckbox"><label for="checkbox">modal</label> <a onclick="openURL()">window.open(self)</a>
+        <li>
+            <input type="text" id="targetOpenURL" size="60" /> <a onclick="openURL()">window.open</a> <input type="checkbox" id="openURLCheckbox"/><label for="checkbox">modal</label>
+        </li>
+        <li>
+            <input type="text" id="exitNextOpenURL" size="60" /> <a onclick="exit()">exit</a>
         </li>
     </ul>
 
