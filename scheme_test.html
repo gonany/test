@@ -277,8 +277,13 @@
         }
 
         function exit() {
-            const targetURLString = document.getElementById('exitNextOpenURL');
-            const str = `{ "nextScheme": ${targetURLString} }`;
+            const targetURL = document.getElementById('exitNextOpenURL');
+            let str;
+            if (targetURL.value !== "") {
+                str = `{ "nextScheme": ${targetURL.value} }`;
+            } else {
+                str = '{}'
+            }
             sendCommonMessage("exit", str)
         }
 
@@ -373,10 +378,11 @@
 
         function onload() {
             debugMessage(navigator.userAgent)
-            document.getElementById("image").src = getMetaContentByName("og:image");
         
             const targetOpenURL = document.getElementById('targetOpenURL');
-            targetOpenURL.value = window.location.href;
+            if (targetOpenURL) {
+                targetOpenURL.value = window.location.href;
+            }
         }
 
         function debugMessage(msg) {
@@ -399,7 +405,6 @@
 </head>
 
 <body onload="onload()">
-
     <p></p>
     <textarea id="debugMessage" rows="10" cols="50">디버그 메시지 출력</textarea>
     <div id="debugMessageCount"></div>
