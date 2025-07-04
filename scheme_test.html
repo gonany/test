@@ -390,11 +390,6 @@
             }, 1000)
         }
 
-        document.addEventListener('DOMContentLoaded', function() {
-            const targetOpenURL = document.getElementById('targetOpenURL');
-            targetOpenURL.value = window.location.href;
-        }
-
     </script>
 
 </head>
@@ -479,6 +474,9 @@
 
     <script>
         document.getElementById("image").src = getMetaContentByName("og:image");
+        
+        const targetOpenURL = document.getElementById('targetOpenURL');
+        targetOpenURL.value = window.location.href;
     </script>
 
 </body>
