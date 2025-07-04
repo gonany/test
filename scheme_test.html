@@ -256,7 +256,7 @@
             sendCommonMessage("close", str)
         }
 
-        function windowOpenURL() {
+        function webViewScheme() {
             const targetInput = document.getElementById('targetOpenURL');
             const rawValue = targetInput.value.trim();
 
@@ -268,22 +268,36 @@
             let currentURL;
             try {
                 const encodedURL = encodeURIComponent(rawValue);
-                currentURL = new URL(`app://webView?url=${encodedURL}`);  // 백틱 사용!
+                currentURL = new URL(`app://webView?url=${encodedURL}`);
             } catch (error) {
                 alert('유효하지 않은 URL 형식입니다. 올바른 URL을 입력해주세요.');
                 console.error('URL 파싱 오류:', error);
                 return;
             }
 
-            const checkbox = document.getElementById('openURLCheckbox');
-            if (checkbox.checked) {
+            const modelCheckbox = document.getElementById('webViewModalCheckbox');
+            if (modelCheckbox.checked) {
                 currentURL.searchParams.set('isModalEntry', 'true');
             } else {
                 currentURL.searchParams.delete('isModalEntry');
             }
 
+            const naviCheckbox = document.getElementById('webViewNaviCheckbox');
+            if (naviCheckbox.checked) {
+                currentURL.searchParams.set('showNavigationBar', 'true');
+            } else {
+                currentURL.searchParams.delete('showNavigationBar');
+            }
+
+            const toolbarCheckbox = document.getElementById('webViewToolbarCheckbox');
+            if (toolbarCheckbox.checked) {
+                currentURL.searchParams.set('showToolbar', 'true');
+            } else {
+                currentURL.searchParams.delete('showToolbar');
+            }
+
             debugMessage(currentURL.toString());
-            window.open(currentURL.toString());
+            window.location.href = currentURL.toString();
         }
 
         function exit() {
@@ -447,9 +461,13 @@
     <ul>
         <li>
             <input type="text" id="targetOpenURL" size="20" />
-            <button onclick="windowOpenURL()">window.open</button>
-            <input type="checkbox" id="openURLCheckbox"/>
-            <label for="openURLCheckbox">modal</label>
+            <button onclick="webViewScheme()">웹뷰스킴실행</button>
+            <input type="checkbox" id="webViewModalCheckbox"/>
+            <label for="webViewModalCheckbox">modal</label>
+            <input type="checkbox" id="webViewNaviCheckbox"/>
+            <label for="webViewNaviCheckbox">showNavigationBar</label>
+            <input type="checkbox" id="webViewToolbarCheckbox"/>
+            <label for="webViewToolbarCheckbox">showToolbar</label>
         </li>
         <li>
             <input type="text" id="exitNextOpenURL" size="20" />
