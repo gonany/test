@@ -520,63 +520,102 @@
 
 
      <h2>앱 스킴 생성기</h2>
-      <label>
-        URL 입력:
-        <input type="text" id="inputURL" placeholder="https://example.com">
-      </label>
+       <label>
+    URL 입력:
+    <input type="text" id="inputURL" placeholder="https://example.com">
+  </label>
 
-      <div id="result">생성된 URL이 여기에 표시됩니다.</div>
+  <label>
+    <input type="checkbox" id="isModalEntry"> isModalEntry
+  </label>
+  <label>
+    <input type="checkbox" id="showNavigationBar"> showNavigationBar
+  </label>
+  <label>
+    <input type="checkbox" id="showToolbar"> showToolbar
+  </label>
 
-      <label>
-        <input type="checkbox" id="isModalEntry"> isModalEntry
-      </label>
-      <label>
-        <input type="checkbox" id="showNavigationBar"> showNavigationBar
-      </label>
-      <label>
-        <input type="checkbox" id="showToolbar"> showToolbar
-      </label>
+  <label>
+    동작 선택:
+    <select id="actionSelect">
+      <option value="none">선택 안 함</option>
+      <option value="login">로그인 확인</option>
+      <option value="vehicle">차량 확인</option>
+    </select>
+  </label>
 
-      <script>
+  <label id="needConfirmWrapper" style="display: none;">
+    <input type="checkbox" id="needConfirm"> 로그인 팝업 노출
+  </label>
+
+  <div id="result">생성된 URL이 여기에 표시됩니다.</div>
+
+  <script>
     const inputURL = document.getElementById('inputURL');
     const isModalEntry = document.getElementById('isModalEntry');
     const showNavigationBar = document.getElementById('showNavigationBar');
     const showToolbar = document.getElementById('showToolbar');
+    const actionSelect = document.getElementById('actionSelect');
+    const needConfirm = document.getElementById('needConfirm');
+    const needConfirmWrapper = document.getElementById('needConfirmWrapper');
     const result = document.getElementById('result');
 
     function updateURL() {
       const rawURL = inputURL.value.trim();
 
-      // 유효한 입력이 없으면 초기화
       if (!rawURL) {
         result.textContent = '생성된 URL이 여기에 표시됩니다.';
         return;
       }
 
-      let encodedURL = encodeURIComponent(rawURL);
-      let schemeURL = new URL(`app://webView?url=${encodedURL}`);
+      let baseEncodedURL = encodeURIComponent(rawURL);
+      let baseURL = new URL(`app://webView?url=${baseEncodedURL}`);
 
       if (isModalEntry.checked) {
-        schemeURL.searchParams.set('isModalEntry', 'true');
+        baseURL.searchParams.set('isModalEntry', 'true');
       } else {
-        schemeURL.searchParams.delete('isModalEntry');
+        baseURL.searchParams.delete('isModalEntry');
       }
 
       if (showNavigationBar.checked || showToolbar.checked) {
-        schemeURL.searchParams.set('showNavigationBar', showNavigationBar.checked.toString());
-        schemeURL.searchParams.set('showToolbar', showToolbar.checked.toString());
+        baseURL.searchParams.set('showNavigationBar', showNavigationBar.checked.toString());
+        baseURL.searchParams.set('showToolbar', showToolbar.checked.toString());
       } else {
-        schemeURL.searchParams.delete('showNavigationBar');
-        schemeURL.searchParams.delete('showToolbar');
+        baseURL.searchParams.delete('showNavigationBar');
+        baseURL.searchParams.delete('showToolbar');
       }
 
-      result.textContent = schemeURL.toString();
+      // 최종 URL (baseURL)을 중첩 래핑할지 결정
+      let finalURL = baseURL.toString();
+      const selectedAction = actionSelect.value;
+
+      if (selectedAction === "login") {
+        const wrapped = new URL("app://login");
+        wrapped.searchParams.set("nextUrl", encodeURIComponent(finalURL));
+        if (needConfirm.checked) {
+          wrapped.searchParams.set("needConfirm", "true");
+        }
+        finalURL = wrapped.toString();
+      } else if (selectedAction === "vehicle") {
+        const wrapped = new URL("app://vehicleRequired");
+        wrapped.searchParams.set("url", encodeURIComponent(finalURL));
+        finalURL = wrapped.toString();
+      }
+
+      result.textContent = finalURL;
     }
 
+    // 이벤트 리스너 등록
     inputURL.addEventListener('input', updateURL);
     isModalEntry.addEventListener('change', updateURL);
     showNavigationBar.addEventListener('change', updateURL);
     showToolbar.addEventListener('change', updateURL);
+    actionSelect.addEventListener('change', () => {
+      const action = actionSelect.value;
+      needConfirmWrapper.style.display = action === "login" ? "block" : "none";
+      updateURL();
+    });
+    needConfirm.addEventListener('change', updateURL);
   </script>
 
 </body>
