@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>앱 스킴 생성기 & 분석기</title>
+  <style>
+    :root {
+      --gray-bg: #f2f2f7;
+      --gray-border: #d1d1d6;
+      --blue: #007aff;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      background-color: white;
+      padding: 24px;
+      max-width: 480px;
+      margin: 0 auto;
+      box-sizing: border-box;
+    }
+
+    h2 {
+      font-size: 1.4rem;
+      font-weight: 600;
+      margin-bottom: 24px;
+      color: #000;
+    }
+
+    .mode-tabs {
+      display: flex;
+      border: 1px solid var(--gray-border);
+      border-radius: 12px;
+      overflow: hidden;
+      margin-bottom: 20px;
+    }
+
+    .tab-button {
+      flex: 1;
+      padding: 10px 0;
+      border: none;
+      background: white;
+      font-size: 1rem;
+      color: var(--blue);
+      cursor: pointer;
+      font-weight: 500;
+    }
+
+    .tab-button.active {
+      background-color: var(--blue);
+      color: white;
+    }
+
+    label {
+      font-size: 1rem;
+      color: #333;
+    }
+
+    input[type="text"], select {
+      padding: 12px;
+      font-size: 1rem;
+      border: 1px solid var(--gray-border);
+      border-radius: 12px;
+      background-color: var(--gray-bg);
+      margin-top: 8px;
+      margin-bottom: 16px;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    .checkbox-label {
+      display: flex;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    .checkbox-label input[type="checkbox"] {
+      margin-right: 10px;
+      transform: scale(1.2);
+    }
+
+    .checkbox-label label {
+      margin: 0;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    #result {
+      margin-top: 24px;
+      padding: 16px;
+      background-color: var(--gray-bg);
+      border: 1px solid var(--gray-border);
+      border-radius: 12px;
+      word-break: break-word;
+      font-size: 0.95rem;
+      color: #000;
+    }
+
+    #copyButton, #exeButton {
+      margin-top: 12px;
+      padding: 10px 16px;
+      background-color: var(--blue);
+      color: white;
+      font-size: 1rem;
+      font-weight: 500;
+      border: none;
+      border-radius: 10px;
+      width: 100%;
+      cursor: pointer;
+    }
+
+    #copyButton:active, #exeButton:active {
+      background-color: #005bb5;
+    }
+
+    @media (max-width: 480px) {
+      body {
+        padding: 16px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <h2>앱 스킴 생성기 & 분석기</h2>
+
+  <!-- 탭 선택 -->
+  <div class="mode-tabs">
+    <button class="tab-button active" data-mode="generate">앱 스킴 생성</button>
+    <button class="tab-button" data-mode="analyze">앱 스킴 분석</button>
+  </div>
+
+  <label for="inputURL">URL 입력</label>
+  <input type="text" id="inputURL" placeholder="URL 입력해주세요." />
+
+  <div class="checkbox-label">
+    <input type="checkbox" id="isModalEntry" />
+    <label for="isModalEntry">isModalEntry</label>
+  </div>
+  <div class="checkbox-label">
+    <input type="checkbox" id="showNavigationBar" />
+    <label for="showNavigationBar">showNavigationBar</label>
+  </div>
+  <div class="checkbox-label">
+    <input type="checkbox" id="showToolbar" />
+    <label for="showToolbar">showToolbar</label>
+  </div>
+
+  <label for="actionSelect">추가 확인 동작</label>
+  <select id="actionSelect">
+    <option value="none">선택 안함</option>
+    <option value="login">로그인 필수 확인</option>
+    <option value="vehicle">차량 필수 확인</option>
+  </select>
+
+  <div id="needConfirmWrapper" class="checkbox-label" style="display: none;">
+    <input type="checkbox" id="needConfirm" checked />
+    <label for="needConfirm">로그인 팝업 노출</label>
+  </div>
+
+  <div id="result">결과가 여기에 표시됩니다.</div>
+  <button id="copyButton">복사하기</button>
+  <button id="exeButton">생성된 URL 이동(실행)</button>
+
+  <script>
+    const inputURL = document.getElementById('inputURL');
+    const isModalEntry = document.getElementById('isModalEntry');
+    const showNavigationBar = document.getElementById('showNavigationBar');
+    const showToolbar = document.getElementById('showToolbar');
+    const actionSelect = document.getElementById('actionSelect');
+    const needConfirm = document.getElementById('needConfirm');
+    const needConfirmWrapper = document.getElementById('needConfirmWrapper');
+    const result = document.getElementById('result');
+    const copyButton = document.getElementById('copyButton');
+
+    const inputs = [isModalEntry, showNavigationBar, showToolbar, actionSelect, needConfirm];
+
+    let mode = "generate"; // 기본값
+
+    function generateURL() {
+      const rawURL = inputURL.value.trim();
+      if (!rawURL) {
+        result.textContent = '결과가 여기에 표시됩니다.';
+        return;
+      }
+
+      const noOptionsSelected =
+        !isModalEntry.checked &&
+        !showNavigationBar.checked &&
+        !showToolbar.checked &&
+        actionSelect.value === 'none';
+
+      if (noOptionsSelected) {
+        result.textContent = rawURL;
+        return;
+      }
+
+      let baseEncodedURL = encodeURIComponent(rawURL);
+      let baseURL = new URL(`app://webView?url=${baseEncodedURL}`);
+
+      if (isModalEntry.checked) baseURL.searchParams.set('isModalEntry', 'true');
+      if (showNavigationBar.checked || showToolbar.checked) {
+        baseURL.searchParams.set('showNavigationBar', showNavigationBar.checked.toString());
+        baseURL.searchParams.set('showToolbar', showToolbar.checked.toString());
+      }
+
+      let finalURL = baseURL.toString();
+
+      if (actionSelect.value === 'login') {
+        const wrapped = new URL("app://login");
+        wrapped.searchParams.set("nextUrl", encodeURIComponent(finalURL));
+        if (needConfirm.checked) wrapped.searchParams.set("needConfirm", "true");
+        finalURL = wrapped.toString();
+      } else if (actionSelect.value === 'vehicle') {
+        const wrapped = new URL("app://vehicleRequired");
+        wrapped.searchParams.set("url", encodeURIComponent(finalURL));
+        finalURL = wrapped.toString();
+      }
+
+      result.textContent = finalURL;
+    }
+
+    function analyzeURL() {
+      const input = inputURL.value.trim();
+      if (!input.startsWith("app://")) {
+        result.textContent = "유효한 앱 스킴 URL이 아닙니다.";
+        return;
+      }
+
+      try {
+        let url = new URL(input);
+        let type = url.hostname;
+        let params = new URLSearchParams(url.search);
+        let finalURL = null;
+
+        isModalEntry.checked = false;
+        showNavigationBar.checked = false;
+        showToolbar.checked = false;
+        actionSelect.value = "none";
+        needConfirm.checked = false;
+        needConfirmWrapper.style.display = "none";
+
+        if (type === "login") {
+          finalURL = decodeURIComponent(params.get("nextUrl"));
+          if (params.get("needConfirm") === "true") needConfirm.checked = true;
+          actionSelect.value = "login";
+          needConfirmWrapper.style.display = "flex";
+          url = new URL(finalURL);
+          params = url.searchParams;
+        } else if (type === "vehicleRequired") {
+          finalURL = decodeURIComponent(params.get("url"));
+          actionSelect.value = "vehicle";
+          url = new URL(finalURL);
+          params = url.searchParams;
+        }
+
+        if (url.hostname === "webView") {
+          const originalWebURL = decodeURIComponent(params.get("url") || "");
+          isModalEntry.checked = params.get("isModalEntry") === "true";
+          showNavigationBar.checked = params.get("showNavigationBar") === "true";
+          showToolbar.checked = params.get("showToolbar") === "true";
+
+          result.textContent = originalWebURL || "원본 URL을 추출할 수 없습니다.";
+        } else {
+          result.textContent = "webView 스킴이 포함되어 있지 않습니다.";
+        }
+
+      } catch (e) {
+        result.textContent = "분석 실패: 유효한 앱 스킴이 아닙니다.";
+      }
+    }
+
+    function updateMode() {
+      const isAnalyze = mode === "analyze";
+
+      inputs.forEach(el => el.disabled = isAnalyze);
+
+      if (!isAnalyze) {
+        inputURL.value = "https://kia.com";
+        generateURL();
+      } else {
+        inputURL.value = "";
+        result.textContent = '결과가 여기에 표시됩니다.';
+      }
+
+      inputURL.placeholder = "URL 입력해주세요.";
+
+      needConfirmWrapper.style.display =
+        actionSelect.value === "login" ? "flex" : "none";
+    }
+
+    inputURL.addEventListener('input', () => {
+      if (mode === "generate") generateURL();
+      else analyzeURL();
+    });
+
+    inputs.forEach(el => el.addEventListener('change', generateURL));
+    actionSelect.addEventListener('change', () => {
+      needConfirmWrapper.style.display = actionSelect.value === "login" ? "flex" : "none";
+      if (mode === "generate") generateURL();
+    });
+
+    copyButton.addEventListener('click', () => {
+      const text = result.textContent;
+      if (!text || text.includes('표시')) return;
+      navigator.clipboard.writeText(text).then(() => {
+        copyButton.textContent = '복사됨!';
+        setTimeout(() => { copyButton.textContent = '복사하기'; }, 1500);
+      });
+    });
+
+    exeButton.addEventListener('click', () => {
+      const text = result.textContent;
+      window.location.href = text
+    });
+
+    // 탭 버튼 이벤트
+    document.querySelectorAll('.tab-button').forEach(button => {
+      button.addEventListener('click', () => {
+        document.querySelectorAll('.tab-button').forEach(btn => btn.classList.remove('active'));
+        button.classList.add('active');
+        mode = button.dataset.mode;
+        updateMode();
+      });
+    });
+
+    updateMode(); // 초기 실행
+  </script>
+
+</body>
+</html>
