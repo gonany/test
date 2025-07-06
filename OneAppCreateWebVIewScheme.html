@@ -184,19 +184,18 @@
         return;
       }
 
-      const noOptionsSelected =
+      const noWebViewOptionsSelected =
         !isModalEntry.checked &&
         !showNavigationBar.checked &&
-        !showToolbar.checked &&
-        actionSelect.value === 'none';
+        !showToolbar.checked;
 
-      if (noOptionsSelected) {
-        result.textContent = rawURL;
-        return;
+      let baseURL;
+      if (noWebViewOptionsSelected) {
+        baseURL = new URL(rawURL);
+      } else {
+        baseURL = new URL("app://webView");
+        baseURL.searchParams.set("url", rawURL);
       }
-
-      let baseEncodedURL = encodeURIComponent(rawURL);
-      let baseURL = new URL(`app://webView?url=${baseEncodedURL}`);
 
       if (isModalEntry.checked) baseURL.searchParams.set('isModalEntry', 'true');
       if (showNavigationBar.checked || showToolbar.checked) {
@@ -208,12 +207,12 @@
 
       if (actionSelect.value === 'login') {
         const wrapped = new URL("app://login");
-        wrapped.searchParams.set("nextUrl", encodeURIComponent(finalURL));
+        wrapped.searchParams.set("nextUrl", finalURL);
         if (needConfirm.checked) wrapped.searchParams.set("needConfirm", "true");
         finalURL = wrapped.toString();
       } else if (actionSelect.value === 'vehicle') {
         const wrapped = new URL("app://vehicleRequired");
-        wrapped.searchParams.set("url", encodeURIComponent(finalURL));
+        wrapped.searchParams.set("url", finalURL);
         finalURL = wrapped.toString();
       }
 
@@ -262,7 +261,7 @@
 
           result.textContent = originalWebURL || "원본 URL을 추출할 수 없습니다.";
         } else {
-          result.textContent = "webView 스킴이 포함되어 있지 않습니다.";
+          result.textContent = url;
         }
 
       } catch (e) {
