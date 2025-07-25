@@ -433,6 +433,17 @@
 	      alert("입력이 취소되었습니다.");
 	    }
         }
+
+	function requestCamera() {
+	  navigator.mediaDevices.getUserMedia({ video: true })
+	    .then(stream => {
+	      console.log("카메라 접근 성공", stream);
+	    })
+	    .catch(err => {
+	      console.error("카메라 접근 실패", err);
+	      alert("카메라 권한이 필요합니다.");
+	    });
+	}
     </script>
 
 </head>
@@ -530,6 +541,9 @@
         </li>
 	<li>
             <a onclick="showPrompt()">showPrompt(Input)</a>
+        </li>
+	<li>
+            <a onclick="requestCamera()">카메라 권한 요청</a>
         </li>
     </ul>
 
