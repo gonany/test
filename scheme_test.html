@@ -252,7 +252,7 @@
         }
 
         function postClose(message) {
-            const str = {};
+            const str = `{}`;
             sendCommonMessage("close", str)
         }
 
@@ -268,7 +268,7 @@
             let currentURL;
             try {
                 const encodedURL = encodeURIComponent(rawValue);
-                currentURL = new URL(app://webView?url=${encodedURL});
+                currentURL = new URL(`app://webView?url=${encodedURL}`);
             } catch (error) {
                 alert('유효하지 않은 URL 형식입니다. 올바른 URL을 입력해주세요.');
                 console.error('URL 파싱 오류:', error);
@@ -304,7 +304,7 @@
             const targetURL = document.getElementById('exitNextOpenURL');
             let str;
             if (targetURL.value !== "") {
-                str = { "nextScheme": "${targetURL.value}" };
+                str = `{ "nextScheme": "${targetURL.value}" }`;
             } else {
                 str = '{}'
             }
@@ -327,57 +327,57 @@
         }
 
         function postMessageShowTost(message) {
-            const str = {
+            const str = `{
 			  "message": "JS 토스트 메시지",
 			  "durationTime": "long"
-			  };
+			  }`;
             sendCommonMessage("showToast", str)
         }
 
         function postMessageOpenWebView(url) {
-            const str = {
+            const str = `{
 			  "url": "https://naver.com",
 			  "isNavigationBar": false,
 			  "isToolBar": true,
 			  "appearType": "push"
-			};
+			}`;
             sendCommonMessage("openWebView", str)
         }
 
         function postMessageSetBrightness() {
-            const str = {
+            const str = `{
 			  "uid": "123123123",
 			  "contents": {"brightness": 1.0},
 			  "resultFuncName": "appCallback_cc"
-			};
+			}`;
             sendCommonMessage("screenBrightness", str)
         }
 
         function postMessageGetAuthToken() {
-            const str = {
+            const str = `{
 			  "uid": "123123123",
 			  "resultFuncName": "appCallback_cc"
-			};
+			}`;
             sendOneAppMessage("getAuthToken", str)
         }
 
 
         function postMessageGetVehicleRegistrationDocumentFile() {
-            const str = {
+            const str = `{
 			  "uid": "123123123",
 			  "resultFuncName": "appCallbackVehicleRegistrationDocumentFile_cc",
 			  "limitSize": 5
-			};
+			}`;
             sendOneAppMessage("getVehicleRegistrationDocumentFile", str)
         }
 
         function postMessageExit() {
-            const str = {"nextScheme":"app://availablevehicles"};
+            const str = `{"nextScheme":"app://availablevehicles"}`;
             sendOneAppMessage("exit", str)
         }
 
         function postMessageAgreeTerms() {
-            const str = {"termGroupType":"KR_CCI_TOTAL"};
+            const str = `{"termGroupType":"KR_CCI_TOTAL"}`;
             sendOneAppMessage("agreeTerms", str)
         }
 
@@ -436,9 +436,10 @@
 
 	function requestCamera() {
 		if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
-			alert("이 브라우저 또는 환경에서는 카메라를 지원하지 않습니다.");
-			return;
-		}
+        		alert("mediaDevices 실패");
+        		return;
+      		}
+
 	      navigator.mediaDevices.getUserMedia({ video: true })
 		.then(function(stream) {
 			const videoElement = document.getElementById("video");
