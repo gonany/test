@@ -435,12 +435,7 @@
         }
 
 	function requestCamera() {
-		alert("카메라 권한 확인");
-		if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
-        		alert("getUserMedia is not supported on this browser.");
-        		return;
-      		}
-
+	      alert("카메라 권한 확인");
 	      navigator.mediaDevices.getUserMedia({ video: true })
 		.then(function(stream) {
 			const videoElement = document.getElementById("video");
