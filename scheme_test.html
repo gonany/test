@@ -436,16 +436,21 @@
 
 	function requestCamera() {
 		alert("카메라 권한 확인");
-		navigator.mediaDevices.getUserMedia({ video: true })
-			.then(stream => {
-	      			console.log("카메라 접근 성공", stream);
-				alert("카메라 접근 성공");
-	    		})
-	    		.catch(err => {
-	      			console.error("카메라 접근 실패", err);
-	      			alert("카메라 권한이 필요합니다.");
-	    		});
-		}
+		if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+        		alert("getUserMedia is not supported on this browser.");
+        		return;
+      		}
+
+	      navigator.mediaDevices.getUserMedia({ video: true })
+		.then(function(stream) {
+			const videoElement = document.getElementById("video");
+			videoElement.srcObject = stream;
+			alert("카메라 접근 성공");
+		})
+		.catch(function(error) {
+			alert("카메라 접근 오류 error: " + error.name + " - " + error.message);
+		});
+	}
     </script>
 
 </head>
@@ -548,7 +553,7 @@
             <a onclick="requestCamera()">카메라 권한 요청</a>
         </li>
     </ul>
-
+	<video id="video" autoplay playsinline></video>
 </body>
 
 </html>
