@@ -434,7 +434,22 @@
 	    }
         }
 
-	function requestCamera() {
+    function requestCameraPermission() {
+        const str = `{
+              "resultFuncName": "cameraPermissionCallback_cc"
+            }`;
+            sendCommonMessage("requestCameraPermission", str)
+    }
+
+    function cameraPermissionCallback_cc(isGranted) {
+        if (isGranted) {
+            alert("카메라 권한이 허용되었습니다.\n카메라를 사용하려면 앱을 완전히 종료한 후 다시 실행해 주세요.")
+        } else {
+            alert("카메라 권한을 허용하지 않았습니다.")
+        }
+    }
+
+	function requestWebPageCamera() {
 		if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
         		alert("mediaDevices 실패");
         		return;
@@ -549,7 +564,10 @@
             <a onclick="showPrompt()">showPrompt(Input)</a>
         </li>
 	<li>
-            <a onclick="requestCamera()">카메라 권한 요청</a>
+            <a onclick="requestCameraPermission()">앱 카메라 권한 요청</a>
+        </li>
+    <li>
+            <a onclick="requestWebPageCamera()">웹페이지 카메라 권한 요청</a>
         </li>
     </ul>
 	<video id="video" autoplay playsinline></video>
