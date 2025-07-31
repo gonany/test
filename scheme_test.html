@@ -449,6 +449,21 @@
         }
     }
 
+    function requestPhoneNumber() {
+        const str = `{
+              "resultFuncName": "requestPhoneNumberCallback_cc"
+            }`;
+            sendCommonMessage("getSelectedPhoneNumber", str)
+    }
+
+    function requestPhoneNumberCallback_cc(phoneNumber) {
+        if (phoneNumber) {
+            alert("선택된 전화번호는 (" + phoneNumber + ") 입니다.")
+        } else {
+            alert("선택된 전화번호가 없습니다.")
+        }
+    }
+
 	function requestWebPageCamera() {
 		if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
         		alert("mediaDevices 실패");
@@ -560,13 +575,16 @@
         <li>
             <a onclick="testOpen()">testOpen</a>
         </li>
-	<li>
+	    <li>
             <a onclick="showPrompt()">showPrompt(Input)</a>
         </li>
-	<li>
+	    <li>
             <a onclick="requestCameraPermission()">앱 카메라 권한 요청</a>
         </li>
-    <li>
+        <li>
+            <a onclick="requestPhoneNumber()">전화번호 요청(권한 요청 포함)</a>
+        </li>
+        <li>
             <a onclick="requestWebPageCamera()">웹페이지 카메라 권한 요청</a>
         </li>
     </ul>
