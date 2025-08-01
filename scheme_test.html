@@ -134,7 +134,7 @@
         }
 
         #outputImage {
-            margin: 5px;
+        	margin: 5px;
             max-width: 95%;
             height: auto;
         }
@@ -328,46 +328,46 @@
 
         function postMessageShowTost(message) {
             const str = `{
-              "message": "JS 토스트 메시지",
-              "durationTime": "long"
-              }`;
+			  "message": "JS 토스트 메시지",
+			  "durationTime": "long"
+			  }`;
             sendCommonMessage("showToast", str)
         }
 
         function postMessageOpenWebView(url) {
             const str = `{
-              "url": "https://naver.com",
-              "isNavigationBar": false,
-              "isToolBar": true,
-              "appearType": "push"
-            }`;
+			  "url": "https://naver.com",
+			  "isNavigationBar": false,
+			  "isToolBar": true,
+			  "appearType": "push"
+			}`;
             sendCommonMessage("openWebView", str)
         }
 
         function postMessageSetBrightness() {
             const str = `{
-              "uid": "123123123",
-              "contents": {"brightness": 1.0},
-              "resultFuncName": "appCallback_cc"
-            }`;
+			  "uid": "123123123",
+			  "contents": {"brightness": 1.0},
+			  "resultFuncName": "appCallback_cc"
+			}`;
             sendCommonMessage("screenBrightness", str)
         }
 
         function postMessageGetAuthToken() {
             const str = `{
-              "uid": "123123123",
-              "resultFuncName": "appCallback_cc"
-            }`;
+			  "uid": "123123123",
+			  "resultFuncName": "appCallback_cc"
+			}`;
             sendOneAppMessage("getAuthToken", str)
         }
 
 
         function postMessageGetVehicleRegistrationDocumentFile() {
             const str = `{
-              "uid": "123123123",
-              "resultFuncName": "appCallbackVehicleRegistrationDocumentFile_cc",
-              "limitSize": 5
-            }`;
+			  "uid": "123123123",
+			  "resultFuncName": "appCallbackVehicleRegistrationDocumentFile_cc",
+			  "limitSize": 5
+			}`;
             sendOneAppMessage("getVehicleRegistrationDocumentFile", str)
         }
 
@@ -424,14 +424,14 @@
             }, 1000)
         }
 
-    function showPrompt() {
-            const name = window.prompt("이름을 입력하세요:", "홍길동");
+	function showPrompt() {
+    	    const name = window.prompt("이름을 입력하세요:", "홍길동");
 
-        if (name !== null) {
-          alert("입력한 이름: " + name);
-        } else {
-          alert("입력이 취소되었습니다.");
-        }
+	    if (name !== null) {
+	      alert("입력한 이름: " + name);
+	    } else {
+	      alert("입력이 취소되었습니다.");
+	    }
         }
 
     function requestPhoneNumber() {
@@ -465,22 +465,22 @@
         }
     }
 
-    function requestWebPageCamera() {
-        if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
-                alert("mediaDevices 실패");
-                return;
-            }
+	function requestWebPageCamera() {
+		if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+        		alert("mediaDevices 실패");
+        		return;
+      		}
 
-          navigator.mediaDevices.getUserMedia({ video: true })
-        .then(function(stream) {
-            const videoElement = document.getElementById("video");
-            videoElement.srcObject = stream;
-            alert("카메라 접근 성공");
-        })
-        .catch(function(error) {
-            alert("카메라 접근 오류 error: " + error.name + " - " + error.message);
-        });
-    }
+	      navigator.mediaDevices.getUserMedia({ video: true })
+		.then(function(stream) {
+			const videoElement = document.getElementById("video");
+			videoElement.srcObject = stream;
+			alert("카메라 접근 성공");
+		})
+		.catch(function(error) {
+			alert("카메라 접근 오류 error: " + error.name + " - " + error.message);
+		});
+	}
     </script>
 
 </head>
@@ -491,7 +491,7 @@
     <div id="debugMessageCount"></div>
     <button onclick="copyDebugMessageToClipboard()">디버그 메시지 클립보드에 복사</button>
     <img id="outputImage" />
-    
+	
     <p></p>
     <p></p>
     <h3>* 공통 인터페이스</h3>
@@ -576,20 +576,17 @@
         <li>
             <a onclick="testOpen()">testOpen</a>
         </li>
-        <li>
+	    <li>
             <a onclick="showPrompt()">showPrompt(Input)</a>
         </li>
         <li>
             <a onclick="requestPhoneNumber()">전화번호 요청(권한 요청 포함)</a>
         </li>
         <li>
-            <a onclick="requestCameraPermission()">앱 카메라 권한 요청</a>
-        </li>
-        <li>
-            <a onclick="requestWebPageCamera()">웹페이지 카메라 권한 요청</a>
+            <a onclick="requestCameraPermission()">앱 카메라 권한 요청 & 웹페이지 카메라 권한 요청</a>
         </li>
     </ul>
-    <video id="video" autoplay playsinline></video>
+	<video id="video" autoplay playsinline></video>
 </body>
 
 </html>
