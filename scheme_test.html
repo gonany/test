@@ -214,7 +214,11 @@
 
 		function onBackButton() {
             alert("onBackButton 호출");
-            sendCommonMessage("historyBack", `{}`)
+			if (history.length <= 1) {
+		        postClose("")
+		    } else {
+		        history.back();
+			}
         }
 
         function onHMGOneAppFSMClose() {
