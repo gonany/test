@@ -204,11 +204,17 @@
         }
 
         function isWebviewClose() {
-            alert(typeof onWebviewClose == "function");
+            alert(typeof onWebViewClose == "function");
         }
 
-        function onWebviewClose() {
-            alert("나가고 싶으면 댕댕이를 눌러줘~");
+        function onWebViewClose() {
+            alert("onWebViewClose 호출");
+			postClose("")
+        }
+
+		function onBackButton() {
+            alert("onBackButton 호출");
+            sendCommonMessage("historyBack", `{}`)
         }
 
         function onHMGOneAppFSMClose() {
