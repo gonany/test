@@ -405,6 +405,14 @@
             sendOneAppMessage("agreeTerms", str)
         }
 
+        function postAuthRequest() {
+            const str = `{
+              "uid": "123123123123123",
+              "resultFuncName": "appCallbackDefault_cc"
+            }`;
+            sendOneAppMessage("authRequest", str)
+        }
+
         function setBase64ToImage(base64ImageData) {
             var imgElement = document.getElementById('outputImage');
             imgElement.src = base64ImageData;
@@ -418,6 +426,12 @@
             setBase64ToImage(base64Image);
 
             debugMessage("appCallbackVehicleRegistrationDocumentFile_cc data.length=" + data.length + ", fileName:" + jsonObject.result.name + ", mimeType:" + jsonObject.result.mimeType)
+        }
+
+        function appCallbackDefault_cc(data) {
+            var jsonObject = JSON.parse(data);
+
+            debugMessage("appCallbackDefault_cc data.length=" + data.length + ", data:" + datape)
         }
 
         function appCallback_cc(data) {
@@ -577,6 +591,9 @@
         </li>
         <li>
             <a onclick="postMessageAgreeTerms()">AgreeTerms</a>
+        </li>
+        <li>
+            <a onclick="postAuthRequest()">authRequest</a>
         </li>
     </ul>
 
