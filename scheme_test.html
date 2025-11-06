@@ -388,7 +388,7 @@
 
         function postMessageGetVehicleRegistrationDocumentFile() {
             const str = `{
-			  "uid": "123123123",
+			  "uid": "postMessageGetVehicleRegistrationDocumentFile",
 			  "resultFuncName": "appCallbackVehicleRegistrationDocumentFile_cc",
 			  "limitSize": 5
 			}`;
@@ -407,7 +407,7 @@
 
         function postAuthRequest() {
             const str = `{
-              "uid": "123123123123123",
+              "uid": "postAuthRequest",
               "resultFuncName": "appCallbackDefault_cc"
             }`;
             sendOneAppMessage("authRequest", str)
@@ -429,9 +429,7 @@
         }
 
         function appCallbackDefault_cc(data) {
-            var jsonObject = JSON.parse(data);
-
-            debugMessage("appCallbackDefault_cc data.length=" + data.length + ", data:" + datape)
+            debugMessage("appCallbackDefault_cc data.length=" + data.length + ", data:" + data)
         }
 
         function appCallback_cc(data) {
