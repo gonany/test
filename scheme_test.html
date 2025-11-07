@@ -255,15 +255,31 @@
         }
 
         function sendCommonMessage(funcName, value) {
-            let newFuncName = "HMGCommonInterface_" + funcName
-            debugMessage(newFuncName + " / " + value)
-            window.webkit.messageHandlers[newFuncName].postMessage(value);
+            callNativeBridge("HMGCommonInterface", funcName, value);
         }
 
         function sendOneAppMessage(funcName, value) {
-            let newFuncName = "HMGOneAppInterface_" + funcName
-            debugMessage(newFuncName + " / " + value)
-            window.webkit.messageHandlers[newFuncName].postMessage(value);
+            callNativeBridge("HMGOneAppInterface", funcName, value);
+        }
+        
+        function callNativeBridge(interfaceName, funcName, value) {
+            let newFuncName = interfaceName + "_" + funcName;
+            debugMessage(newFuncName + " / " + value);
+            
+            // iOS 체크 (WKWebView)
+            if (window.webkit && window.webkit.messageHandlers && window.webkit.messageHandlers[newFuncName]) {
+                window.webkit.messageHandlers[newFuncName].postMessage(value);
+                return true;
+            }
+            // Android 체크
+            else if (window[interfaceName] && typeof window[interfaceName][funcName] === 'function') {
+                window[interfaceName][funcName](value);
+                return true;
+            }
+            else {
+                console.warn('Native bridge not found: ' + newFuncName);
+                return false;
+            }
         }
 
         function postClose(message) {
