@@ -408,6 +408,14 @@
             }`;
             sendOneAppMessage("getDeviceUUID", str)
         }
+		
+		function postMessageVehicleSupportedState() {
+            const str = `{
+			  "uid": "12312312333",
+			  "resultFuncName": "appCallback_cc"
+			}`;
+            sendOneAppMessage("getAuthToken", str)
+        }
 
         function postMessageGetVehicleRegistrationDocumentFile() {
             const str = `{
@@ -616,6 +624,10 @@
         <li>
             <a onclick="postMessageDeviceUUID()">GetDeviceUUID</a>
         </li>
+		<li>
+		    <a onclick="postMessageVehicleSupportedState()">GetVehicleSupportedState</a>
+		</li>
+		
         <li>
             <a onclick="postMessageGetVehicleRegistrationDocumentFile()">GetVehicleRegistrationDocumentFile</a>
         </li>
