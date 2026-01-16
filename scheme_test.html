@@ -401,6 +401,11 @@
             sendOneAppMessage("getAuthToken", str)
         }
 
+        function postOpenMaintenanceMap() {
+            const str = `{"type":"MAKE_APPOINTMENT","vin":"KNAM6411BPA048072","partCode":"BASIC"}`;
+            sendOneAppMessage("openMaintenanceMap", str)
+        }
+
         function postMessageDeviceUUID() {
             const str = `{
               "uid": "1231231233123",
@@ -593,6 +598,10 @@
         <li>
             <a onclick="postMessageTitle()">타이틀 업데이트</a>
         </li>
+        <li>
+            <a onclick="postOpenMaintenanceMap()">openMaintenanceMap</a>
+        </li>
+        
         
     </ul>
 
