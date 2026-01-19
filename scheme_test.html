@@ -413,6 +413,14 @@
             }`;
             sendOneAppMessage("getDeviceUUID", str)
         }
+
+		function postSelectedPhoneNumber() {
+            const str = `{
+              "uid": "1231231233122133",
+              "resultFuncName": "appCallback_cc"
+            }`;
+            sendOneAppMessage("getSelectedPhoneNumber", str)
+        }
 		
 		function postMessageVehicleSupportedState() {
             const str = `{
@@ -632,6 +640,9 @@
         </li>
         <li>
             <a onclick="postMessageDeviceUUID()">GetDeviceUUID</a>
+        </li>
+		<li>
+            <a onclick="postSelectedPhoneNumber()">getSelectedPhoneNumber</a>
         </li>
 		<li>
 		    <a onclick="postMessageVehicleSupportedState()">GetVehicleSupportedState</a>
