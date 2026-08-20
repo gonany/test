@@ -449,6 +449,14 @@
             sendOneAppMessage("agreeTerms", str)
         }
 
+        function postSetNavigationBarColor() {
+            const str = `{
+              "uid": "4234234",
+              "backgroundColor": "#FF0000"
+            }`;
+            sendOneAppMessage("setNavigationBarColor", str)
+        }
+
         function postAuthRequest() {
             const str = `{
               "uid": "UUID02394850230",
@@ -656,6 +664,9 @@
         </li>
         <li>
             <a onclick="postMessageAgreeTerms()">AgreeTerms</a>
+        </li>
+        <li>
+            <a onclick="postSetNavigationBarColor()">setNavigationBarColor</a>
         </li>
         <li>
             <a onclick="postAuthRequest()">authRequest</a>
